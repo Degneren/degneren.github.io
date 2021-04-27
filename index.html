@@ -39,14 +39,14 @@ function SetCookie(Name, Value, Expiration)
   var ExpDate = new Date();
   if (Expiration != null)
    ExpDate.setDate(ExpDate.getDate() +
-           7);
+           Expiration);
   // Encode the data for storage.
-  var CookieValue = escape(testValue) +
+  var CookieValue = escape(Value) +
    "; expires=" + ExpDate.toUTCString();
   // Store the cookie.
-  document.cookie = TestCookie + "=" + CookieValue;
+  document.cookie = Name + "=" + CookieValue;
 }
-</script>
+</script>script>
 
 </body>
 </html>
