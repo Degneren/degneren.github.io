@@ -30,5 +30,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  <a href="javascript: Cookiebot.renew()">Edit your consent</a>
 
 
+<script>
+
+function SetCookie(Name, Value, Expiration)
+{
+  // Create a date variable that contains
+  // the expiration date.
+  var ExpDate = new Date();
+  if (Expiration != null)
+   ExpDate.setDate(ExpDate.getDate() +
+           7);
+  // Encode the data for storage.
+  var CookieValue = escape(testValue) +
+   "; expires=" + ExpDate.toUTCString();
+  // Store the cookie.
+  document.cookie = TestCookie + "=" + CookieValue;
+}
+</script>
+
 </body>
 </html>
