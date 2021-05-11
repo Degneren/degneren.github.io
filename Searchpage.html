@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SPSOnlineFrontend</title>
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js"
+          data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75"
+          data-blockingmode="auto"
+          type="text/javascript"></script>  
+  	
+  <link href="https://api.autoaddress.ie/2.0/control/css/autoaddress.min.css" rel="stylesheet"/> 
+
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+	<h1>Space for the banner</h1>
+	<h1>Space for the banner</h1>
+	<h1>Space for the banner</h1>
+	<h1>Space for the banner</h1>
+	
+	<div id="myDiv"></div>  
+
+	<!-- works with 1.11.2 -->
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+	
+	<!-- does not work with 2.0.0 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>	
+	
+	<script src="https://api.autoaddress.ie/2.0/control/js/jquery.autoaddress.min.js"></script>
+
+	<script type="text/javascript" > 
+	   $(function(){
+		  $("#myDiv").AutoAddress({ 
+			 key : "1D313E57-2F01-380A-CB7C-183988D390BC",
+			 vanityMode : true,
+			 addressProfile : "Demo5LineV2",
+			 country : "ie",
+			 language : "en"
+		  }); 
+	   });
+	</script>  
+</body>
+</html>
