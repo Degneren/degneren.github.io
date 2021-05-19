@@ -114,6 +114,10 @@
     document.cookie = Name + "=" + CookieValue;
   }
 </script>
+<script>
+window.addEventListener('load', (event) => {
+  console.log('page is fully loaded');
+});</script>
 <script data-cookieconsent="ignore">
   SetNecessaryCookie('CookieConsentIgnoreCookie', 'CookieConsentIgnoreCookieValue', 7)
 </script>
