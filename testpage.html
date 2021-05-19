@@ -4,7 +4,7 @@
   <title>degn.io</title>
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <!-- Cookiebot Script -->
-  <script id="Cookiebot" data-georegions="{'region':'NL','cbid':'6ad75b3c-771a-4e85-9670-2aa36694b38c'}" src="https://consent.cookiebot.com/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript" tabindex="1"></script>
+  <script id="Cookiebot" data-georegions="{'region':'NL','cbid':'6ad75b3c-771a-4e85-9670-2aa36694b38c'}" src="https://consent.cookiebot.com/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript"></script>
   <!-- End Cookiebot Script -->
   <script>
     window.addEventListener("CookiebotOnDialogDisplay", function() {
@@ -102,6 +102,8 @@
 <a href="https://www.degn.io/GoogleConsentPage">Google Consent page</a>
 <br><br>
   <button onclick="Cookiebot.renew()" tabindex="3">Edit your consent</button>
+  <br><br><br>
+  <button onclick="Cookiebot.dialog.submitConsent()" id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll">test button</button>
   <br><br><br>
   <button onclick="SetCookie('buttonClickCookie','buttonClickCookieValue',7)" tabindex="1">Click me for delicious cookies!</button>
   <br><br><br>
