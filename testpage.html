@@ -6,15 +6,15 @@
   <!-- Cookiebot Script -->
   <script id="Cookiebot" data-georegions="{'region':'NL','cbid':'6ad75b3c-771a-4e85-9670-2aa36694b38c'}" src="https://consent.cookiebot.com/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript"></script>
   <!-- End Cookiebot Script -->
-window.addEventListener("CookiebotOnDialogInit", function () {
+<script>window.addEventListener("CookiebotOnDialogInit", function () {
     if (!Cookiebot.consented && this.top.location !== this.location) {
         Cookiebot.submitCustomConsent(!1, !1, !1);
         window.addEventListener("CookiebotOnConsentReady", function () {
             Cookiebot.deleteConsentCookie();
         });
     }
-});
-  
+});</script>
+
     <!-- Google Tag Manager -->
     <!--script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
