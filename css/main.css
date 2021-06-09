@@ -16,4 +16,7 @@ img {
   border: 2px solid #000000;
 }
 
-#CybotCookiebotDialog { font-family: Helvetica!important; }
+#CybotCookiebotDialog { 
+  font-family: Helvetica!important; 
+  min-width: 200px!important;
+}
