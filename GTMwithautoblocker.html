@@ -11,7 +11,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<title>degn.io - GTM test page</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!-- Cookiebot Script -->
-  <!--script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript"></script -->
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript"></script>
   <!-- End Cookiebot Script -->
 
 
@@ -20,13 +20,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <h1>For testing GTM</h1>
-  <br><br><br><br><br>
   <p>
    <a href="https://www.degn.io/cookiedeclaration">Cookie Declaration</a>
  </p>
-  <p>
-   <a href="https://www.degn.io/GTMwithautoblocker.html">GTM with auto-blocker</a>
- </p>
+
  <br><br><br><br><br>
  <img data-src="media/Statistics.png" data-cookieconsent="statistics" alt="Statistics">
  <img data-src="media/Marketing.png" data-cookieconsent="marketing" alt="Marketing">
@@ -36,7 +33,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  <button onclick="Cookiebot.renew()">Edit your consent</button>
  <br><br><br>
  <button onclick="dataLayer.push({'event': 'GTMButtonClicked'});" >GTM Button</a>
-  <br><br>
 <button onclick="SetCookie('buttonClickCookie','buttonClickCookieValue',7)">Click me for delicious cookies!</button>
 <br><br><br>
 <h1>
@@ -44,8 +40,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </h1>
 <br>
 <iframe width="400" height="250" 
-data-src="https://www.youtube.com/embed/28F4ogO7wN4" 
-data-cookieconsent="marketing"
+src="https://www.youtube.com/embed/28F4ogO7wN4" 
 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <script>
 
