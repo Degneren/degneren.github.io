@@ -58,20 +58,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </h1>
 <br>
 
+   <script>
+    window.addEventListener('CookiebotOnAccept', function () {
+        var iframes = document.getElementsByTagName('iframe');
+    for (var i of iframes)
+      for (var a of i.attributes) {
+      var t = /data-gtm-yt-inspected-\w+/.exec(a.name);
+      if (t) i.removeAttribute(t[0]);
+    }
+    })
+    </script>
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <iframe width="400" height="250" data-cookieconsent="marketing"
 data-src="https://www.youtube.com/embed/28F4ogO7wN4?enablejsapi=1" 
 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-
-<script>
-  window.addEventListener("CookiebotOnAccept", function(){
- for (var i of iframes)
-  for (var a of i.attributes) {
-    var t = /data-gtm-yt-inspected-\w+/.exec(a.name);
-    if (t) i.removeAttribute(t[0]);
-}}, false)
-</script>
 
 <script>
 function SetCookie(Name, Value, Expiration)
