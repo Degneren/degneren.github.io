@@ -43,12 +43,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   Youtube video (marked as marketing):
 </h1>
 <br>
+
+
+<!-- YouTube stuff -->
+
+   <script>
+    window.addEventListener('CookiebotOnAccept', function () {
+        var iframes = document.getElementsByTagName('iframe');
+    for (var i of iframes)
+      for (var a of i.attributes) {
+      var t = /data-gtm-yt-inspected-\w+/.exec(a.name);
+      if (t) i.removeAttribute(t[0]);
+    }
+    })
+    </script>
+
 <script src="https://www.youtube.com/iframe_api"></script>
+
 <iframe width="400" height="250" 
-src="https://www.youtube.com/embed/28F4ogO7wN4?rel=0&enablejsapi=1" 
+data-src="https://www.youtube.com/embed/28F4ogO7wN4?rel=0&enablejsapi=1" 
 data-cookieconsent="marketing"
 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- end of YouTube stuff -->
+
 <script>
+
 
 function SetCookie(Name, Value, Expiration)
 {
