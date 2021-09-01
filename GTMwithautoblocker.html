@@ -65,12 +65,12 @@ title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; cli
 
 
 <script>
-  window.addEventListener("CookiebotOnAccept"), function(){
+  window.addEventListener("CookiebotOnAccept", function(){
  for (var i of iframes)
   for (var a of i.attributes) {
     var t = /data-gtm-yt-inspected-\w+/.exec(a.name);
     if (t) i.removeAttribute(t[0]);
-}}
+}}, false)
 </script>
 
 <script>
