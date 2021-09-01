@@ -53,8 +53,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     for (var i of iframes)
       for (var a of i.attributes) {
       var t = /data-gtm-yt-inspected-\w+/.exec(a.name);
-      if (t) i.removeAttribute(t[0]);
-    }
+      if (t){ i.removeAttribute(t[0]);
+        console.log("GTM YT attributes removed")
+    }}
     })
     </script>
 
@@ -63,6 +64,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <iframe width="400" height="250" 
 data-src="https://www.youtube.com/embed/28F4ogO7wN4?rel=0&enablejsapi=1" 
 data-cookieconsent="marketing"
+onload="javascript:console.log('YouTube iframe loaded')"
 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <!-- end of YouTube stuff -->
