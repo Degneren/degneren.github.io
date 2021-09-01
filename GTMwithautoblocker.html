@@ -57,9 +57,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   Youtube video (Not marked up - classified as marketing):
 </h1>
 <br>
-<iframe width="400" height="250" data-cookieconsent="marketing"
+
+<!--Element to which the iframe will be appended-->
+<div id="28F4ogO7wN4" class="cookieconsent-optin-marketing"></div>
+
+<script>
+    var videos = ["28F4ogO7wN4"];
+
+    function addIframe(id) {
+        // exit function if marketing cookies are rejected
+        if (!Cookiebot.consent.marketing) return;
+        // exit function if element doesn't exist
+        if (document.getElementById(id) === null) return;
+
+        var i = document.createElement("iframe"),
+            c = document.getElementById(id);
+
+        i.src = "//www.youtube.com/embed/" + id;
+        i.setAttribute("frameborder", "0");
+        i.setAttribute("allowfullscreen", "");
+
+        // remove any nodes if already present to avoid duplication
+        c.innerHTML = "";
+
+        c.appendChild(i);
+    }
+
+    window.addEventListener("CookiebotOnConsentReady", function () {
+        for (var i = 0; i < videos.length; i++) addIframe(videos[i]);
+    });
+</script>
+
+
+<!--iframe width="400" height="250" data-cookieconsent="marketing"
 data-src="https://www.youtube.com/embed/28F4ogO7wN4?enablejsapi=1" 
-title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe-->
+
 <script>
 
 function SetCookie(Name, Value, Expiration)
