@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K2Q83T7');</script>
+<!-- End Google Tag Manager -->
+	<title>degn.io - GTM test page 2</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!-- Cookiebot Script -->
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" type="text/javascript"></script>
+  <!-- End Cookiebot Script -->
+
+
+</head>
+<body>
+
+
+  <h1>For testing GTM</h1>
+  <br><br><br><br><br>
+  <p>
+   <a href="https://www.degn.io/cookiedeclaration">Cookie Declaration</a>
+ </p>
+  <p>
+   <a href="https://www.degn.io/GTMwithautoblocker.html">GTM with auto-blocker</a>
+ </p>
+ <br><br><br><br><br>
+ <img data-src="media/Statistics.png" data-cookieconsent="statistics" alt="Statistics">
+ <img data-src="media/Marketing.png" data-cookieconsent="marketing" alt="Marketing">
+ <img data-src="media/Preferences.png" data-cookieconsent="preferences" alt="Preferences">
+
+<br><br>
+ <button onclick="Cookiebot.renew()">Edit your consent</button>
+ <br><br><br>
+ <button onclick="dataLayer.push({'event': 'GTMButtonClicked'});" >GTM Button</button>
+  <br><br>
+<button onclick="SetCookie('buttonClickCookie','buttonClickCookieValue',7)">Click me for delicious cookies!</button>
+<br><br><br>
+<h1>
+  Youtube video (marked as marketing):
+</h1>
+<br>
+
+<iframe width="400" height="250" 
+data-src="https://www.youtube.com/embed/28F4ogO7wN4?rel=0&enablejsapi=1" 
+data-cookieconsent="marketing"
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<script>
+
+function SetCookie(Name, Value, Expiration)
+{
+  // Create a date variable that contains
+  // the expiration date.
+  var ExpDate = new Date();
+  if (Expiration != null)
+   ExpDate.setDate(ExpDate.getDate() +
+           Expiration);
+  // Encode the data for storage.
+  var CookieValue = escape(Value) +
+   "; expires=" + ExpDate.toUTCString();
+  // Store the cookie.
+  document.cookie = Name + "=" + CookieValue;
+}
+</script>
+<script>
+	SetCookie('siteTestCookie', 'siteTestCookieValue', 7)
+</script>
+
+</body>
+</html>
