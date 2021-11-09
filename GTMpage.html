@@ -27,6 +27,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-K2Q83T7');</script>
 <!-- End Google Tag Manager -->
 
+<!-- Start Enhanced Ecommerce stuff -->
+<script>
+/**
+ * Call this function when a user clicks on a product link. This function uses the event
+ * callback datalayer variable to handle navigation after the ecommerce data has been sent
+ * to Google Analytics.
+ * @param {Object} productObj An object representing a product.
+ */
+var productObj = function(productObj) {
+  dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+  dataLayer.push({
+    'event': 'productClick',
+    'ecommerce': {
+      'click': {
+        'products': [{
+          'name': 'testName',                      // Name or ID is required.
+          'id': 'testId',
+          'price': 'testPrice'
+         }]
+       }
+     }
+  });
+console.log("EE product link test button clicked");
+}
+</script>
+<!-- End Enhanced Ecommerce stuff -->
+
 
   <title>degn.io - GTM test page</title>
   <link rel="stylesheet" type="text/css" href="css/main.css">
