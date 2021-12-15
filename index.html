@@ -23,6 +23,14 @@ document.getElementById("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSe
 })
 </script>
 
+<!-- Remove branding from widget test start -->
+<style type="text/css">
+    .CookiebotWidget-main-logo{
+        display: none!important;
+    }
+</style>
+<!-- Remove branding from widget test end -->
+
 <script>
  window.addEventListener("CookiebotOnDialogDisplay", function () {
 console.log("CookiebotOnDialogDisplay event")
