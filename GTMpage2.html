@@ -3,36 +3,58 @@
 <head>
 
 
-<!--Google Consent Mode Stuff -->
-  <script data-cookieconsent="ignore">
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag("consent", "default", {
-        ad_storage: "denied",
-        analytics_storage: "denied",
-        functionality_storage: "denied",
-        personalization_storage: "denied",
-        security_storage: "granted",
-        wait_for_update: 500,
-    });
-    gtag("set", "ads_data_redaction", true);
+<script type="text/javascript">
+ window.addEventListener('CookiebotOnDialogDisplay', function (e) {
+ if (Cookiebot.dialog.userCountry == 'NL')
+ {
+ Cookiebot.dialog.consentLevel = 'implied';
+ Cookiebot.dialog.setOnscrollEvent();
+console.log("Cookiebot userCountry is NL")
+ }
+ }, false);
 </script>
-<!--Google Consent Mode Stuff -->
 
 
     <!-- Google Tag Manager -->
-<script data-cookieconsent="ignore">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-K2Q83T7');</script>
 <!-- End Google Tag Manager -->
-	<title>degn.io - GTM test page 2</title>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<!-- Cookiebot Script -->
-  <script id="Cookiebot" src="https://consent.cookiebot.eu/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" type="text/javascript"></script>
+
+<!-- Start Enhanced Ecommerce stuff -->
+<script>
+/**
+ * Call this function when a user clicks on a product link. This function uses the event
+ * callback datalayer variable to handle navigation after the ecommerce data has been sent
+ * to Google Analytics.
+ * @param {Object} productObj An object representing a product.
+ */
+var productObj = function(productObj) {
+  //dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+  dataLayer.push({
+    'ecommerce': {
+      'click': {
+        'products': [{
+          'name': 'testName',                      // Name or ID is required.
+          'id': 'testId',
+          'price': 'testPrice',
+          'quantity' : '1'
+         }]
+       }
+     }
+  });
+console.log("EE product link test button clicked");
+}
+</script>
+<!-- End Enhanced Ecommerce stuff -->
+
+
+  <title>degn.io - GTM test page</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- Cookiebot Script -->
+  <!--script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript"></script -->
   <!-- End Cookiebot Script -->
 
 
@@ -48,6 +70,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <p>
    <a href="https://www.degn.io/GTMwithautoblocker.html">GTM with auto-blocker</a>
  </p>
+  <br><br>   <a href="https://www.degn.io/GTMpage.html">GTM page</a>
+ </p>
+ <br><br>
  <br><br><br><br><br>
  <img data-src="media/Statistics.png" data-cookieconsent="statistics" alt="Statistics">
  <img data-src="media/Marketing.png" data-cookieconsent="marketing" alt="Marketing">
@@ -60,18 +85,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <br><br>
 <button onclick="SetCookie('buttonClickCookie','buttonClickCookieValue',7)">Click me for delicious cookies!</button>
 <br><br><br>
+<button onclick="productObj()">EE product link test</button>
+<br><br><br>
 <h1>
   Youtube video (marked as marketing):
 </h1>
 <br>
+
+
+
+
+<!-- YouTube stuff -->
+
+<!-- Enable GA tracking for YouTube -->
+<script>
+  window.addEventListener("CookiebotOnConsentReady", function() {
+    var d = document, iframes = d.querySelectorAll("body iframe"), i, j, o, s;
+    for (i of iframes) {
+      s = i.src;
+      if (/youtube\.com/g.test(s)) {
+        o = i.outerHTML;
+        if (/enablejsapi=\d/.test(s)) 
+          i.src = s.replace(/[\?&]enablejsapi=\d/,"");
+        i.src += (/\?/.test(s) ? "&" : "?") + "enablejsapi=1";
+        if (/data-gtm-yt-inspected-[\d_]+/.test(o))
+          for (j of o.match(/data-gtm-yt-inspected-[\d_]+/g))
+            i.removeAttribute(j);
+      }
+    }
+  })
+</script>
+
+<script data-cookieconsent="marketing" data-src="https://www.youtube.com/iframe_api"></script>
 
 <iframe width="400" height="250" 
 data-src="https://www.youtube.com/embed/28F4ogO7wN4?rel=0&enablejsapi=1" 
 data-cookieconsent="marketing"
 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<!-- end ofYouTube stuff -->
 
 <script>
+
 
 function SetCookie(Name, Value, Expiration)
 {
@@ -89,8 +144,8 @@ function SetCookie(Name, Value, Expiration)
 }
 </script>
 <script>
-	SetCookie('siteTestCookie', 'siteTestCookieValue', 7)
+  SetCookie('siteTestCookie', 'siteTestCookieValue', 7)
 </script>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>for scrolling purposes
 </body>
 </html>
