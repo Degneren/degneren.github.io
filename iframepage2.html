@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+
+</head>
+<body>
+
+
+  <h1>iframe page 2</h1>
+  <br><br><br><br><br>
+
+ <br><br><br>
+ <img data-src="media/Statistics.png" data-cookieconsent="statistics" alt="Statistics">
+ <img data-src="media/Marketing.png" data-cookieconsent="marketing" alt="Marketing">
+ <img data-src="media/Preferences.png" data-cookieconsent="preferences" alt="Preferences">
+
+<br><br>
+ <button onclick="Cookiebot.renew()">Edit your consent</button>
+ <br><br><br>
+ <button onclick="dataLayer.push({'event': 'GTMButtonClicked'});" >GTM Button</button>
+  <br><br>
+<button onclick="SetCookie('buttonClickCookie','buttonClickCookieValue',7)">Click me for delicious cookies!</button>
+
+<script>
+
+
+function SetCookie(Name, Value, Expiration)
+{
+  // Create a date variable that contains
+  // the expiration date.
+  var ExpDate = new Date();
+  if (Expiration != null)
+   ExpDate.setDate(ExpDate.getDate() +
+           Expiration);
+  // Encode the data for storage.
+  var CookieValue = escape(Value) +
+   "; expires=" + ExpDate.toUTCString();
+  // Store the cookie.
+  document.cookie = Name + "=" + CookieValue;
+}
+</script>
+<script>
+  SetCookie('siteTestCookie', 'siteTestCookieValue', 7)
+</script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>for scrolling purposes
+</body>
+</html>
