@@ -4,13 +4,14 @@
 	<title>degn.io</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!-- Cookiebot Script -->
-  <script id="Cookiebot" data-georegions="{'region':'NL','cbid':'6ad75b3c-771a-4e85-9670-2aa36694b38c'}" src="https://consent.cookiebot.eu/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript" tabindex="1"></script>
+  <script id="Cookiebot" src="https://consent.cookiebot.eu/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript"
+></script>
   <!-- End Cookiebot Script -->
 
 <!-- Display Bulk Consent domains on top-level banner start -->
 <script>
  window.addEventListener("CookiebotOnDialogDisplay", function () {
-var dbct = document.getElementById("CybotCookiebotDialogBodyContentText")
+var dbct = document.getElementById("CybotCookiebotDialogBodyContentText");
 var bulkdomains = document.createElement("div")
 bulkdomains.setAttribute("id", "CybotCookiebotDialogDetailBulkConsent");
 
@@ -19,6 +20,24 @@ var addbulkdomains = dbct.appendChild(bulkdomains);
 })
 </script>
 <!-- Display Bulk Consent domains on top-level banner end -->
+
+
+<script>
+window.addEventListener("CookiebotOnDialogDisplay", function () {
+  const addTo = document.getElementById("CybotCookiebotDialogBodyContentText");
+    domains = [location.hostname, ...Cookiebot.bulkresetdomains],
+    p = document.createElement("p");
+    ul = document.createElement("ul");
+  p.textContent = "Your consent applies to the following domains:"
+  domains.forEach((d) => {
+    var li = document.createElement("li");
+    li.textContent = d;
+    ul.appendChild(li);
+  })
+  p.appendChild(ul);
+  addTo.parentNode.appendChild(p); 
+})
+</script>
 
 
 <!-- Remove branding from widget test start -->
