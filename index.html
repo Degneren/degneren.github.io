@@ -4,17 +4,23 @@
 	<title>degn.io</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 
-
+<!-- load event listener placed before uc.js -->
 <script>
  window.addEventListener("load", function(){
 console.log("load event fired before uc.js")
  })
 </script>
+
   <!-- Cookiebot Script -->
-  <script id="Cookiebot" src="https://consent.cookiebot.eu/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript"
+  <script id="Cookiebot" 
+  src="https://consent.cookiebot.eu/uc.js" 
+  data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" 
+  data-blockingmode="auto" 
+  type="text/javascript"
 ></script>
   <!-- End Cookiebot Script -->
 
+<!-- load event listener placed after uc.js -->
 <script>
  window.addEventListener("load", function(){
 console.log("load event fired after uc.js")
