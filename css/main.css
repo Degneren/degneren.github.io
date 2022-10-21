@@ -24,3 +24,10 @@ img {
 #CookiebotWidget {
 /*font-family:  Brush Script MT!important;*/
 }
+
+@media only screen and (max-width: 600px) {
+#CookiebotWidget {
+  display: none;
+/*font-family:  Brush Script MT!important;*/
+}
+}
