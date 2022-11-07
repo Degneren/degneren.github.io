@@ -1,3 +1,1 @@
-<script>
-	SetCookie('externalScriptCookie', 'externalScriptCookieValue', 7)
-</script>
+SetCookie('externalScriptCookie', 'externalScriptCookieValue', 7)
