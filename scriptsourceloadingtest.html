@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>degn.io</title>
+
+  <!-- Cookiebot Script -->
+  <script id="Cookiebot" 
+  src="https://consent.cookiebot.com/uc.js" 
+  data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" 
+  data-blockingmode="auto" 
+  type="text/javascript"
+></script>
+  <!-- End Cookiebot Script -->
+
+</head>
+<body>
+  <h1>Hello World!</h1>
+
+<script>
+function SetCookie(Name, Value, Expiration)
+{
+  // Create a date variable that contains
+  // the expiration date.
+  var ExpDate = new Date();
+  if (Expiration != null)
+   ExpDate.setDate(ExpDate.getDate() +
+           Expiration);
+  // Encode the data for storage.
+  var CookieValue = escape(Value) +
+   "; expires=" + ExpDate.toUTCString();
+  // Store the cookie.
+  document.cookie = Name + "=" + CookieValue;
+}
+</script>
+
+<!-- loading auto-blocked script -->
+<script type="text/javascript" src="autoblockedscript.js"></script>
+
+<!-- loading manually blocked script -->
+<script type="text/plain" data-cookieconsent="marketing" src="manuallyblockedscript.js"></script>
+
+</body>
+</html>
