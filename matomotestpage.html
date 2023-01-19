@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- Matomo Tag Manager -->
+<script>
+var _mtm = window._mtm = window._mtm || [];
+_mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+g.async=true; g.src='https://cdn.matomo.cloud/degn.matomo.cloud/container_OYL21lxu.js'; s.parentNode.insertBefore(g,s);
+</script>
+<!-- End Matomo Tag Manager -->
+  <title>degn.io - GTM test page</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+  <h1>For testing Matomo</h1>
+  <br><br><br><br><br>
+  <p>
+   <a href="https://www.degn.io/cookiedeclaration">Cookie Declaration</a>
+ </p>
+  <p>
+   <a href="https://www.degn.io/GTMwithautoblocker">GTM with auto-blocker</a>
+ </p>
+<p>
+ <a href="https://www.degn.io/GTMpage2">GTM page test 2</a>
+ </p>
+ <br><br><br>
+ <img data-src="media/Statistics.png" data-cookieconsent="statistics" alt="Statistics">
+ <img data-src="media/Marketing.png" data-cookieconsent="marketing" alt="Marketing">
+ <img data-src="media/Preferences.png" data-cookieconsent="preferences" alt="Preferences">
+
+<br><br>
+ <button onclick="Cookiebot.renew()">Edit your consent</button>
+  <br><br>
+<button onclick="SetCookie('buttonClickCookie','buttonClickCookieValue',7)">Click me for delicious cookies!</button>
+<br><br><br>
+<h1>
+  Youtube video (marked as marketing):
+</h1>
+<br>
+<!-- YouTube stuff -->
+
+<!-- Enable GA tracking for YouTube -->
+<script>
+  window.addEventListener("CookiebotOnConsentReady", function() {
+    var d = document, iframes = d.querySelectorAll("body iframe"), i, j, o, s;
+    for (i of iframes) {
+      s = i.src;
+      if (/youtube\.com/g.test(s)) {
+        o = i.outerHTML;
+        if (/enablejsapi=\d/.test(s)) 
+          i.src = s.replace(/[\?&]enablejsapi=\d/,"");
+        i.src += (/\?/.test(s) ? "&" : "?") + "enablejsapi=1";
+        if (/data-gtm-yt-inspected-[\d_]+/.test(o))
+          for (j of o.match(/data-gtm-yt-inspected-[\d_]+/g))
+            i.removeAttribute(j);
+      }
+    }
+  })
+</script>
+
+<script type="text/plain" data-cookieconsent="marketing" src="https://www.youtube.com/iframe_api"></script>
+
+<iframe width="400" height="250" 
+data-src="https://www.youtube.com/embed/28F4ogO7wN4?rel=0&enablejsapi=1" 
+data-cookieconsent="marketing"
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- end ofYouTube stuff -->
+
+<script>
+
+
+function SetCookie(Name, Value, Expiration)
+{
+  // Create a date variable that contains
+  // the expiration date.
+  var ExpDate = new Date();
+  if (Expiration != null)
+   ExpDate.setDate(ExpDate.getDate() +
+           Expiration);
+  // Encode the data for storage.
+  var CookieValue = escape(Value) +
+   "; expires=" + ExpDate.toUTCString();
+  // Store the cookie.
+  document.cookie = Name + "=" + CookieValue;
+}
+</script>
+<script>
+  SetCookie('siteTestCookie', 'siteTestCookieValue', 7)
+</script>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br id="cookiedeclarationplaceholder"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>for scrolling purposes
+</body>
+</html>
