@@ -130,6 +130,27 @@ console.log("CookiebotOnDialogDisplay event")
     }, 
 </style-->
 
+<!-- Create 'underlay' element behind banner -->
+<script>
+window.addEventListener("CookiebotOnDialogDisplay", function(){
+var underlay = document.createElement("div");
+underlay.id = "CybotCookiebotDialogBodyUnderlay",
+underlay.style.opacity = "0.75"
+underlay.style.width = "100%",
+underlay.style.pointerEvents = "auto",
+underlay.style.height = "100%",
+underlay.style.display = "block";
+var bodyElement = document.getElementsByTagName("body")[0];
+bodyElement.appendChild(underlay);});
+
+window.addEventListener("CookiebotOnConsentReady", function(){
+var createdUnderlay = document.getElementById("CybotCookiebotDialogBodyUnderlay");
+if (createdUnderlay){
+createdUnderlay.style.display = "none";
+}})
+</script>
+
+
 <script>
 function SetCookie(Name, Value, Expiration)
 {
