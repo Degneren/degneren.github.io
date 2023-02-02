@@ -44,6 +44,7 @@ console.log("CookiebotOnDialogDisplay event")
     w.addEventListener("CookiebotOnDialogDisplay", function() {
         var underlay = d.createElement("div");
         underlay.id = u;
+        underlay.style.pointerEvents = "auto",
         underlay.style.opacity = "0.75";
         d.body.appendChild(underlay);
     })
@@ -51,7 +52,7 @@ console.log("CookiebotOnDialogDisplay event")
         d.getElementById(u) && (d.getElementById(u).style.display = "none");
     })
 }(window, document, "CybotCookiebotDialogBodyUnderlay")</script>
-
+<!-- underlay element end -->
 
 </body>
 </html>
