@@ -27,7 +27,7 @@ img {
 
 @media only screen and (max-width: 1000px) {
 #CookiebotWidget {
-  display: none !important;
+
 /*font-family:  Brush Script MT!important;*/
 }
 }
