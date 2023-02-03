@@ -30,7 +30,7 @@ console.log("load event fired after uc.js")
 
 
 <!-- Display Bulk Consent domains on top-level banner start -->
-<script>
+<!--script>
  window.addEventListener("CookiebotOnDialogDisplay", function () {
 var dbct = document.getElementById("CybotCookiebotDialogBodyContentText");
 var bulkdomains = document.createElement("div")
@@ -39,11 +39,11 @@ bulkdomains.setAttribute("id", "CybotCookiebotDialogDetailBulkConsent");
 var addbulkdomains = dbct.appendChild(bulkdomains);
 
 })
-</script>
+</script-->
 <!-- Display Bulk Consent domains on top-level banner end -->
 
 
-<script>
+<!--script>
 window.addEventListener("CookiebotOnDialogDisplay", function () {
   const addTo = document.getElementById("CybotCookiebotDialogBodyContentText");
     domains = [location.hostname, ...Cookiebot.bulkresetdomains],
@@ -58,7 +58,7 @@ window.addEventListener("CookiebotOnDialogDisplay", function () {
   p.appendChild(ul);
   addTo.parentNode.appendChild(p); 
 })
-</script>
+</script-->
 
 
 <!-- Remove branding from widget test start -->
