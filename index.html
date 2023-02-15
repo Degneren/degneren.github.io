@@ -11,6 +11,14 @@ console.log("load event fired before uc.js")
  })
 </script>
 
+<!-- Hide 'Details' tab in Cookiebot banner -->
+<!--script>
+window.addEventListener("CookiebotOnDialogDisplay", function() {
+var detailstab = document.getElementById("CybotCookiebotDialogNavDetails");
+detailstab.parentNode.style.display="none"
+})
+</script-->
+
   <!-- Cookiebot Script -->
   <script id="Cookiebot" 
   src="https://consent.cookiebot.com/uc.js" 
