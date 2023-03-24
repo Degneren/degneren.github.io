@@ -1,0 +1,357 @@
+<html>
+<body>
+<p>
+  Websites using Google Tag Manager (GTM) can deploy Cookiebot by following these
+  step-by-step instructions.
+</p>
+<p>In this guide, we will show you how to:</p>
+<div>
+  <ol>
+    <li>
+      <strong style="font-weight: bolder;">Implement the cookie consent banner</strong>
+    </li>
+    <li>
+      <strong style="font-weight: bolder;">Control cookie-setting tags</strong>
+    </li>
+    <li>
+      <strong style="font-weight: bolder;">Display the cookie declaration on a subpage</strong>
+    </li>
+  </ol>
+</div>
+<p>
+  We assume that you've already created a
+  <abbr title="Google Tag Manager">GTM</abbr> account, created a website container
+  in <abbr title="Google Tag Manager">GTM</abbr>, and added the
+  <abbr title="Google Tag Manager">GTM</abbr> container snippet to your website
+  as required:
+  <a style="background-color: transparent;" title="Link: https://support.google.com/tagmanager/answer/6103696" href="https://support.google.com/tagmanager/answer/6103696" target="_blank" rel="noopener">https://support.google.com/tagmanager/answer/6103696</a><br>
+  &nbsp;
+</p>
+<h2 id="implementing" style="font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif; font-weight: 400; margin-top: 0px;">
+  1. Implementing the cookie consent banner in
+  <abbr title="Google Tag Manager">GTM</abbr>
+</h2>
+<p>
+  First, obtain the Cookiebot
+  <abbr title="Consent Management Platform">CMP</abbr> tag template from the Template
+  Gallery.<br>
+  The easiest way to do this is by clicking the <strong>Get Started</strong> button
+  on the Consent Overview
+</p>
+<p>
+  <img src="https://support.cookiebot.com/hc/article_attachments/4414568455570/mceclip0.png" alt="Get started button">
+</p>
+<p>
+  <a id="consent_overview"></a>
+  <span>You can find the Consent Overview by clicking on the <img src="https://support.cookiebot.com/attachments/token/jxUQFIhn2fhBDJEIQtGqdCgTs/?name=inline1773974276.png" data-original-height="18" data-original-width="18"> icon on the <strong>Tags</strong> section.</span>
+</p>
+<p>
+  <span>If you don't see this icon, you can enable this function on the&nbsp;</span><strong>Admin</strong><span>&nbsp;tab, under&nbsp;</span><strong>Container Settings</strong><span>.&nbsp;</span><br>
+  <span>Check the "Enable consent overview" box&nbsp;under&nbsp;</span><strong>Additonal Settings</strong><span>&nbsp;and save your changes:</span><br>
+  <br>
+  <img src="https://support.cookiebot.com/attachments/token/UQD5cy0XWMTDFsvWdhERjVI6R/?name=inline-1439235798.png" data-original-height="141" data-original-width="674"><br>
+  <span>When you click the <strong>Get Started</strong> button, a pane will slide in from the right where the Cookiebot <abbr title="Consent Management Platform">CMP</abbr> template should be one of the featured <abbr title="Consent Management Platform">CMP</abbr> templates.</span>
+</p>
+<p>
+  <small>Alternatively, add a new tag and click the "Discover more tag types in the Community Template Gallery" item</small>
+</p>
+<p>
+  <img src="https://support.cookiebot.com/hc/article_attachments/4414575490450/mceclip1.png" alt="discover">
+</p>
+<p>
+  Enter "Cookiebot" in the search field to find the Cookiebot
+  <abbr title="Consent Management Platform">CMP</abbr> tag template
+</p>
+<p>
+  <img src="https://support.cookiebot.com/hc/article_attachments/4414562135442/mceclip2.png" alt="search">
+</p>
+<p>
+  Select the "Cookiebot <abbr title="Consent Management Platform">CMP</abbr>" item
+  and click the "Add to workspace" button.
+</p>
+<p>
+  <img src="https://support.cookiebot.com/hc/article_attachments/4414562201234/mceclip3.png" alt="Add the workspace">
+</p>
+<p>Confirm by clicking "Add"</p>
+<p>&nbsp;</p>
+<p>
+  Next, create a new tag by clicking "New" ❯ "Tag Configuration" and select "<strong style="box-sizing: border-box; font-weight: bold; color: #333333; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial;">Cookiebot <abbr title="Consent Management Platform">CMP</abbr></strong><span style="color: #333333; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">" from the list of standard tag types.<br>&nbsp;<br></span>In
+  the "Cookiebot ID" field, copy in the ID from the 'Your Scripts' tab under your
+  account on
+  <a href="https://www.cookiebot.com/" target="_blank" rel="noopener">cookiebot.com</a>.
+</p>
+<p>
+  Choose "<strong>Consent initialization - All pages</strong>" as trigger and apply
+  a name to your tag at the top of the configuration page, e.g. "Cookiebot". Click
+  "Save" to create the tag.
+</p>
+<p>
+  This is what your tag configuration should look like (except for the value of
+  the Cookiebot ID):
+</p>
+<p>
+  <img style="margin: 5px; padding: 10px; border: 1px #aaaaaa; border-radius: 4px; background: #fff; box-shadow: 1px 1px 3px #888888;" src="https://support.cookiebot.com/hc/article_attachments/4417446178962/mceclip0.png" alt="Cookiebot CMP tag">
+</p>
+<p>
+  <img style="margin: 5px; padding: 10px; border: 1px #aaaaaa; border-radius: 4px; background: #fff; box-shadow: 1px 1px 3px #888888;" src="https://support.cookiebot.com/hc/article_attachments/4417455021202/mceclip1.png" alt="Consent Initialization - All Pages trigger">
+</p>
+<p>
+  Make sure that you have registered and saved the domain name(s) of your website(s)
+  in Cookiebot.
+</p>
+<div>
+  &nbsp;<br>
+  <br>
+  <h3>1.1 Defining the Google Consent Mode default consent state</h3>
+  <p>
+    A default consent state of 'denied' will apply until the user has submitted
+    a consent. You can change this default behavior and add different default
+    consent states for users in different geographical regions by clicking "Add
+    region" under the "Default Consent State" section.
+  </p>
+  <p>
+    <img src="https://support.cookiebot.com/hc/article_attachments/5614268500380/defaultconsentstateregions.png" alt="defaultconsentstateregions.png">
+  </p>
+  <p>
+    In the example above, a global (blank region value) default consent state
+    of 'denied' is defined for all users along with a specific 'granted'-state
+    for users from California (US-CA).
+  </p>
+  <p>
+    Please use ISO-3166-1 alpha-2 country codes for region values. For the United
+    States it is also possible to use state-specific regions, e.g. "US-CA" for
+    California. If a specific default consent state applies to multiple regions,
+    you can add a comma-separated string of regions to the Region field.
+  </p>
+  <p>&nbsp;</p>
+  <p>
+    <abbr title="Google Tag Manager">GTM</abbr> by default supports 5 different
+    consent types that are automatically mapped by Cookiebot to the 4 categories
+    used in Cookiebot <abbr title="Consent Management Platform">CMP</abbr>:<br>
+    <br>
+  </p>
+  <table style="border-collapse: collapse; border: 0;">
+    <tbody>
+      <tr>
+        <td style="padding: 4px; vertical-align: top; width: 25%; background-color: #1032cf;">
+          <span style="color: #fff;"><strong>GTM Consent type</strong></span>
+        </td>
+        <td style="padding: 4px; vertical-align: top; width: 20%; background-color: #1032cf;">
+          <span style="color: #fff;"><strong>Cookiebot type</strong></span>
+        </td>
+        <td style="padding: 4px; vertical-align: top; width: 55%; background-color: #1032cf;">
+          <span style="color: #fff;"><strong>Description</strong></span>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-left: 4px; vertical-align: top;">ad_storage</td>
+        <td style="padding-left: 4px; vertical-align: top;">marketing</td>
+        <td style="padding-left: 4px; vertical-align: top;">
+          Enables browser storage (such as cookies) related to advertising
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-left: 4px; vertical-align: top; background-color: #f2f2f2;">analytics_storage</td>
+        <td style="padding-left: 4px; vertical-align: top; background-color: #f2f2f2;">statistics</td>
+        <td style="padding-left: 4px; vertical-align: top; background-color: #f2f2f2;">
+          Enables browser storage (such as cookies) related to analytics
+          e.g. visit duration
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-left: 4px; vertical-align: top;">functionality_storage</td>
+        <td style="padding-left: 4px; vertical-align: top;">preferences</td>
+        <td style="padding-left: 4px; vertical-align: top;">
+          Enables browser storage that supports the functionality of the
+          website or app e.g. language settings
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-left: 4px; vertical-align: top; background-color: #f2f2f2;">personalization_storage</td>
+        <td style="padding-left: 4px; vertical-align: top; background-color: #f2f2f2;">preferences</td>
+        <td style="padding-left: 4px; vertical-align: top; background-color: #f2f2f2;">
+          Enables browser storage related to personalization e.g. video
+          recommendations
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-left: 4px; vertical-align: top;">security_storage</td>
+        <td style="padding-left: 4px; vertical-align: top;">necessary</td>
+        <td style="padding-left: 4px; vertical-align: top;">
+          Enables browser storage related to security such as authentication
+          functionality, fraud prevention, and other user protection. Users
+          will be informed about the specific storage purposes in the cookie
+          declaration, but this type does not require consent from the
+          end user.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>&nbsp;</p>
+  <p>
+    The category ‘necessary’ (mapped to consent type security_storage) is by
+    default set to ‘Allow’ and is not configurable, as it does not require consent.
+  </p>
+  <p>&nbsp;</p>
+  <p>
+    <a id="controlling_cookies"></a>
+    <span style="font-size: 1.5em;">2. Controlling cookies</span>
+  </p>
+</div>
+<div>
+  <div>
+    <p>
+      Google Tag Manager includes several features that work together with
+      Cookiebot to help you manage how tags behave in response to the end user's
+      consent choices.
+    </p>
+    <p>
+      Specific tags (such as Google Ads, Analytics, Floodlight and Conversion
+      Linker) have
+      <em><a href="https://support.google.com/tagmanager/answer/10718549?hl=en#tag-settings" target="_self">built-in consent checks</a>.</em>
+      This means that these tags include logic that automatically changes the
+      tag's behavior based on the user's consent state. No consent configuration
+      is needed for this type of tags<sup>*</sup>.
+    </p>
+    <p>
+      Tags which do not have built-in consent checks, which do utilize tracking,
+      must be configured with
+      <em><a href="https://support.google.com/tagmanager/answer/10718549?hl=en#tag-settings" target="_blank" rel="noopener">additional consent checks</a></em>.
+      Opposed to tags with built-in consent checks, which load regardless of
+      consent, tags configured with additional consent checks will not fire
+      unless consent has been given for the corresponding storage category.
+    </p>
+    <p>
+      In the next section we will provide instructions to configure additional
+      consent checks.
+    </p>
+    <p>
+      <sup>*</sup><small>It is important to note that because tags with built-in load regardless of consent, data <strong>will</strong> be transmitted to Google without explicit permission from the visitor. If this is of concern to you, it is recommended to configure tags with built-in consent with additional consent as well. That way the tag will not load prior consent.</small>
+    </p>
+    <h3>
+      <a id="additional_consent_checks"></a>2.1. Setting up Additional Consent
+      Checks
+    </h3>
+    <ol>
+      <li>
+        In your <abbr title="Google Tag Manager">GTM</abbr> container, create
+        the following <em>trigger</em>, to be used in your
+        <abbr title="Google Tag Manager">GTM</abbr> configuration:<br>
+        <strong>Event Name:</strong> cookie_consent_update<br>
+        <strong>Event Type:</strong> Custom Event<br>
+        <strong>Fires On:</strong> All Custom Events<br>
+        <br>
+        Your trigger should look similar to this:<img style="margin: 10px; padding: 10px; border: 1px #aaaaaa; border-radius: 4px; background: #fff; box-shadow: 1px 1px 3px #888888;" src="https://support.cookiebot.com/hc/article_attachments/4417446406802/mceclip2.png" alt="Cookie consent update trigger"><br>
+        <br>
+      </li>
+      <li>
+        Edit the consent settings for all tags that need to be configured
+        with additional consent.<br>
+        You can find these settings in the Tag Editor ❯ Advanced Settings
+        ❯ Consent Settings.<br>
+        Add all storage categories which the tag requires (see the scan report
+        from Cookiebot if you are in doubt).<br>
+        <br>
+        In this example the tag requires consent for ad_storage / marketing
+        cookies:<br>
+        <br>
+        <img style="margin: 10px; padding: 10px; border: 1px #aaaaaa; border-radius: 4px; background: #fff; box-shadow: 1px 1px 3px #888888;" src="https://support.cookiebot.com/hc/article_attachments/4417446488210/mceclip4.png" alt="requires ad_storage"><br>
+        <br>
+      </li>
+      <li>
+        To ensure the tag fires as soon as consent choices have been determined,
+        either from a previous visit or from interaction with the banner
+        the normal "All Pages" trigger will need to be replaced with the
+        trigger which we created in the first step.<br>
+        Here is an example with a Facebook Pixel tag, which with this setup
+        only fires if the visitor has opted in on the required consent type:<br>
+        <br>
+        <img style="margin: 10px; padding: 10px; border: 1px #aaaaaa; border-radius: 4px; background: #fff; box-shadow: 1px 1px 3px #888888;" src="https://support.cookiebot.com/hc/article_attachments/4417458089874/mceclip5.png" alt="Facebook Pixel tag"><br>
+        <br>
+        For a complete view of the consent settings across all the tags in
+        your container, you can enable the
+        <a style="background-color: #ffffff;" href="https://support.google.com/tagmanager/answer/10718549#consent-overview" target="_blank" rel="noopener">Consent Overview</a>
+        from your container settings:<br>
+        <br>
+        <img style="margin: 10px; padding: 10px; border: 1px #aaaaaa; border-radius: 4px; background: #fff; box-shadow: 1px 1px 3px #888888;" src="https://support.cookiebot.com/hc/article_attachments/4417455341202/mceclip6.png" alt="Consent overview"><br>
+        <br>
+        <p>
+          There are additional methods, besides using Consent Mode, to
+          ensure tags cannot load prior consent. Please see
+          <a href="https://support.cookiebot.com/hc/en-us/articles/4417455460114" target="_blank" rel="noopener noreferrer" data-nofollow="true">Alternative methods for conditionally loading tags</a><span> for instructions.</span>
+        </p>
+      </li>
+    </ol>
+  </div>
+  <div></div>
+  <div>
+    <p>
+      <span style="font-size: 1.5em;">3. Implementing the cookie declaration</span>
+    </p>
+  </div>
+  <div>
+    <font style="background-color: #ffffff;">
+      To make available an option for the user to change or withdraw consent,
+      implement Cookiebot's '<em>Cookie Declaration</em>' on a page of your
+      own choice by embedding the following script tag directly into the source
+      of the page and position within the page where you want the cookie declaration
+      to be displayed (replace
+      <span style="background-color: #f7f7f7; color: #333333; display: inline; float: none; font-family: monospace,monospace; font-size: 15px; font-style: normal; font-variant: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-decoration: none; text-indent: 0px; text-transform: none; -webkit-text-stroke-width: 0px; white-space: normal; widows: 2; word-spacing: 0px;">00000000-0000-0000-0000-000000000000</span>
+      with your own Cookiebot ID):
+    </font>
+  </div>
+  <pre data-lang="html">&lt;script<br>  id="CookieDeclaration"<br>  src="https://consent.cookiebot.com/00000000-0000-0000-0000-000000000000/cd.js"<br>  type="text/javascript"<br>&gt;&lt;/script&gt;  </pre>
+  <div>
+    <font style="background-color: #ffffff;">
+      Make sure to link to the page that embeds the declaration from all pages
+      on your website, e.g. in the website template footer.
+    </font>
+  </div>
+  <div>
+    <span style="font-size: 1.5em;"></span>
+  </div>
+  <br>
+  <div>
+    <font style="background-color: #ffffff;">
+      <span style="font-size: 1.5em;">4. Marking up your non-<abbr title="Google Tag Manager">GTM</abbr> website elements</span>
+    </font>
+    <span style="font-size: 1.5em;"></span>
+  </div>
+  <div>
+    <div>
+      <font style="background-color: #ffffff;">
+        With your <abbr title="Google Tag Manager">GTM</abbr> setup now complete,
+        it's time to mark up your non-<abbr title="Google Tag Manager">GTM</abbr>
+        website elements.&nbsp;<br>
+        When you implement Cookiebot using Google Tag Manager, Cookiebot
+        can be used to control tags which require consent and do not originate
+        from Google Tag Manager, i.e. scripts, images and iframes inserted
+        directly into your website template.<br>
+        Such tags need to be marked up for 'prior consent' as described in
+        our
+        <a href="https://support.cookiebot.com/hc/en-us/articles/4405978132242-Manual-Markup-Guide" target="_blank" rel="noopener">manual mark up guide</a><span style="float: none; background-color: #ffffff; color: #333333; cursor: text; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: 2; text-align: left; text-decoration: none; text-indent: 0px; text-transform: none; -webkit-text-stroke-width: 0px; white-space: normal; word-spacing: 0px; display: inline !important;">. If you wish to combine the use of Google Tag Manager and automatic blocking, please see <a href="https://support.cookiebot.com/hc/en-us/articles/360009192739" target="_self">Google Tag Manager and Automatic cookie blocking</a>.</span>
+      </font>
+    </div>
+    <p class="wysiwyg-font-size-large">
+      <br>
+      <strong>Additional resources</strong>
+    </p>
+    <p>
+      For instructions on how to make the cookie banner change language depending
+      on which (language) part of your website a visitor navigates, please
+      see
+      <a class="article-list-link" style="background-color: transparent;" href="https://support.cookiebot.com/hc/en-us/articles/360005164493-Multilingual-support-when-using-GTM" target="_blank" rel="noopener">Multilingual support when using <abbr title="Google Tag Manager">GTM</abbr></a>.
+    </p>
+    <p>
+      Consent Mode is enabled by default. If you for any reason want to disable
+      Consent Mode, please untick the checkbox "Enable Google Consent Mode".
+    </p>
+    <p>
+      See also our blog post:
+      <a style="background-color: transparent;" href="https://www.cookiebot.com/en/google-tag-manager-gdpr/" target="_blank" rel="noopener">Google tag manager and <abbr title="General Data Protection Regulation">GDPR</abbr></a>
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
