@@ -159,7 +159,11 @@ if (createdUnderlay){
 createdUnderlay.style.display = "none";
 }})
 </script>
-
+<script>
+  if(navigator.globalPrivacyControl){
+    console.log("GPC signal detected");
+  }
+</script>
 
 <script>
 function SetCookie(Name, Value, Expiration)
