@@ -185,7 +185,7 @@ function SetCookie(Name, Value, Expiration)
 	SetCookie('unclassifiedCookie', 'unclassifiedCookieValue', 7)
 </script>
 <script>
-  window.addEventListener("CookiebotOnDialogDisplay", function(){
+  window.addEventListener("CookiebotOnLoad", function(){
   console.log("Consent Level: "+Cookiebot.dialog.consentLevel);
   console.log("Dialog Mode: "+Cookiebot.dialog.mode);
   console.log("User Country: "+Cookiebot.dialog.userCountry);
