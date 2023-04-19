@@ -23,9 +23,9 @@ detailstab.parentNode.style.display="none"
   let isFunctionExecuted = false;
   window.addEventListener("CookiebotOnLoad", function() {
     if (!isFunctionExecuted) {
-      console.log("test");
       if (Cookiebot.getDomainUrlParam("botDetectionDisabled") === "true") {
         Cookiebot.submitCustomConsent(1,1,1);
+        console.log("Full opt-in submitted");
       }
       isFunctionExecuted = true;
     }
