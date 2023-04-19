@@ -22,7 +22,7 @@ detailstab.parentNode.style.display="none"
 <script>
   window.addEventListener("CookiebotOnDialogInit", function() {
     if (Cookiebot.getDomainUrlParam("botDetectionDisabled") === "true") {
-      Cookiebot.submitCustomConsent(1,1,1);
+      Cookiebot.setOutOfRegion();
       console.log("Full opt-in submitted");
     }
   });
