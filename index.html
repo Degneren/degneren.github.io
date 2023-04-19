@@ -19,6 +19,19 @@ detailstab.parentNode.style.display="none"
 })
 </script-->
 
+<script>
+  let isFunctionExecuted = false;
+  window.addEventListener("CookiebotOnLoad", function() {
+    if (!isFunctionExecuted) {
+      console.log("test");
+      if (Cookiebot.getDomainUrlParam("botDetectionDisabled") === "true") {
+        Cookiebot.submitCustomConsent(1,1,1);
+      }
+      isFunctionExecuted = true;
+    }
+  });
+</script>
+
   <!-- Cookiebot Script -->
   <script id="Cookiebot" 
   src="https://consent.cookiebot.com/uc.js" 
