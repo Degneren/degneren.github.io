@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" data-blockingmode="auto" type="text/javascript"></script>
+
+    </head>
+    <body>
+        <script type="text/javascript">
+((d,i,m)=>{ct=t=>d.createTextNode(t);ce=e=>d.createElement(e);d.querySelectorAll(i)
+.forEach(e=>{const a=ce('a'),div=ce('div'),p=ce('p'),s=e.dataset.cookieblockSrc,sp=
+/google\.com\/maps\/embed/.test(s)?'Google Maps':/player\.vimeo\.com\/video\//
+.test(s)?'Vimeo':/youtube\.com\/embed\//.test(s)?'YouTube':undefined;if(!sp)return; 
+div.innerHTML=`<div style="background-color:#CCC;display:inline-block;height:${
+e.height}px;position:relative;width:${e.width}px;">`+'<div style="background-color'
++':#848484;border-radius:15px;height:50%;position:absolute;transform:translate(50%'
++',50%);width:50%;"><p style="color:#FFF;font-size:7.5em;position:relative;top:50%'
++';left:50%;margin:0;text-align:center;transform:translate(-50%,-50%);">&ctdot;</p'
++'></div>';div.classList.add(`cookieconsent-optout-${m}`);a.textContent=`accept ${
+m} cookies`;a.href='javascript:Cookiebot.renew()';p.append(ct('Please '), a, ct(
+` to view this ${sp} content.`));div.append(p);e.parentNode.insertBefore(div, e);})
+})(document, 'iframe[data-add-placeholder]', 'marketing')</script>
+
+<p>YouTube</p>
+<iframe
+data-add-placeholder
+width="560" height="315" src="https://www.youtube.com/embed/8GVAxXfZhOY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<p>Vimeo</p>
+<iframe data-add-placeholder class="cookieconsent-optin-marketing" title="vimeo-player" data-cookieblock-src="https://player.vimeo.com/video/179898978?h=1494fdfaa3" width="640" height="360" frameborder="0"    allowfullscreen></iframe>
+
+
+
+    </body>
+
+</html>
