@@ -21,9 +21,8 @@ detailstab.parentNode.style.display="none"
 
 <script>
   window.addEventListener("CookiebotOnDialogInit", function() {
-    if (Cookiebot.getDomainUrlParam("botDetectionDisabled") === "true") {
+    if (Cookiebot.getDomainUrlParam("CookiebotScan") === "true") {
       Cookiebot.setOutOfRegion();
-      console.log("Full opt-in submitted");
     }
   });
 </script>
