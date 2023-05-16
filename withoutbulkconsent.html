@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>degn.io</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<!-- load event listener placed before uc.js -->
+<script>
+ window.addEventListener("load", function(){
+console.log("load event fired before uc.js")
+ })
+</script>
+
+<!-- Hide 'Details' tab in Cookiebot banner -->
+<!--script>
+window.addEventListener("CookiebotOnDialogDisplay", function() {
+var detailstab = document.getElementById("CybotCookiebotDialogNavDetails");
+detailstab.parentNode.style.display="none"
+})
+</script-->
+
+<script>
+  window.addEventListener("CookiebotOnDialogInit", function() {
+    if (Cookiebot.getDomainUrlParam("CookiebotScan") === "true") {
+      Cookiebot.setOutOfRegion();
+    }
+  });
+</script>
+
+<!--script id="CookiebotConfiguration" type="application/json" data-cookieconsent="ignore">
+    {
+        "Frameworks": {
+            "IABTCF2": {
+                "AllowedVendors": [2, 6, 8],
+                "AllowedGoogleACVendors": [],
+                "AllowedPurposes": [1, 2],
+                "AllowedSpecialPurposes": [],
+                "AllowedFeatures": [1],
+                "AllowedSpecialFeatures": [1],
+                "VendorRestrictions": [
+                    {
+                        "VendorId": 2,
+                        "DisallowPurposes": [2, 3, 4]
+                    }
+                ]
+            }
+        }
+    }
+</script-->
+
+  <!-- Cookiebot Script -->
+  <script id="Cookiebot" 
+  src="https://consent.cookiebot.com/uc.js" 
+  data-cbid="fbc570b6-3abc-4ceb-91c8-0671eb229b75" 
+  data-blockingmode="auto"
+  type="text/javascript"
+ 
+></script>
+  <!-- End Cookiebot Script -->
+
+<!-- load event listener placed after uc.js -->
+<script>
+ window.addEventListener("load", function(){
+console.log("load event fired after uc.js")
+ })
+</script>
+
+
+<!-- Display Bulk Consent domains on top-level banner start -->
+<!--script>
+ window.addEventListener("CookiebotOnDialogDisplay", function () {
+var dbct = document.getElementById("CybotCookiebotDialogBodyContentText");
+var bulkdomains = document.createElement("div")
+bulkdomains.setAttribute("id", "CybotCookiebotDialogDetailBulkConsent");
+
+var addbulkdomains = dbct.appendChild(bulkdomains);
+
+})
+</script-->
+<!-- Display Bulk Consent domains on top-level banner end -->
+
+
+<!--script>
+window.addEventListener("CookiebotOnDialogDisplay", function () {
+  const addTo = document.getElementById("CybotCookiebotDialogBodyContentText");
+    domains = [location.hostname, ...Cookiebot.bulkresetdomains],
+    p = document.createElement("p");
+    ul = document.createElement("ul");
+  p.textContent = "Your consent applies to the following domains:"
+  domains.forEach((d) => {
+    var li = document.createElement("li");
+    li.textContent = d;
+    ul.appendChild(li);
+  })
+  p.appendChild(ul);
+  addTo.parentNode.appendChild(p); 
+})
+</script-->
+
+
+<!-- Remove branding from widget test start -->
+<style type="text/css">
+    .CookiebotWidget-main-logo{
+        display: none!important;
+    }
+</style>
+<!-- Remove branding from widget test end -->
+
+<script>
+ window.addEventListener("CookiebotOnDialogDisplay", function () {
+console.log("CookiebotOnDialogDisplay event")
+})
+</script>
+
+
+
+</head>
+<body>
+  <h1>Hello World!</h1>
+
+  <a href="#jumpsection">Jump to jumpsection</a>
+  <p>
+   <a href="https://www.degn.io/cookiedeclaration">Cookie Declaration</a>
+ </p>
+ <br><br>
+<a href="https://www.degn.io/GTMpage">GTM page</a>
+<br><br>
+<a href="https://www.degn.io/scriptsourceloadingtest">Script Source Loading Test</a>
+<br><br>
+<a href="https://www.degn.io/DKPage/DKPagetest">DK page</a>
+ <br><br>
+<a href="https://www.degn.io/GTMpage2">GTM page2</a>
+<br><br>
+<a href="https://www.degn.io/testpages/test2">Test page 2</a>
+<br><br>
+ <br><br>
+<a href="https://www.degn.io/searchpage">Search page</a>
+<br><br>
+<a href="https://www.degn.io/GoogleConsentPage">Google Consent page</a>
+ <br><br><br><br><br>
+ <img data-src="media/Statistics.png" data-cookieconsent="statistics" alt="Statistics">
+ <img data-src="media/Marketing.png" data-cookieconsent="marketing" alt="Marketing">
+ <img data-src="media/Preferences.png" data-cookieconsent="preferences" alt="Preferences">
+<br><br>
+<iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=copenhagen&amp;t=h&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+ 
+<br><br>
+ <button onclick="Cookiebot.renew()">Edit your consent</button>
+ <br><br><br>
+<button tabindex="2" onclick="SetCookie('buttonClickCookie','buttonClickCookieValue',7)">Click me for delicious cookies!</button>
+<br><br><br>
+<button onclick="Cookiebot.show()">Show banner</button>
+<br><br>
+<button onclick="Cookiebot.withdraw()">Withdraw consent</button>
+<br><br><br>
+<h1>
+  Youtube video (marked as marketing):
+</h1>
+<br>
+<img src="media/youtubelogo.png" class="cookieconsent-optout-marketing" alt="YouTube"> 
+
+<iframe width="400" height="250" data-cookieblock-src="https://www.youtube.com/embed/28F4ogO7wN4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br>
+<a href="https://www.youtube.com/watch?v=28F4ogO7wN4" target="_blank">Click for YouTubing!</a>
+
+
+
+<!--removes Cookiebot branding -->
+<!--style type="text/css">
+    div#CybotCookiebotDialogPoweredbyCybot {
+        display: none;
+    }, 
+    a#CybotCookiebotDialog {
+        font-size: 201px;
+    }, 
+</style-->
+
+<!-- Create 'underlay' element behind banner -->
+<script>
+window.addEventListener("CookiebotOnDialogDisplay", function(){
+var underlay = document.createElement("div");
+underlay.id = "CybotCookiebotDialogBodyUnderlay",
+underlay.style.opacity = "0.75"
+underlay.style.width = "100%",
+underlay.style.pointerEvents = "auto",
+underlay.style.height = "100%",
+underlay.style.display = "block";
+var bodyElement = document.getElementsByTagName("body")[0];
+bodyElement.appendChild(underlay);});
+
+window.addEventListener("CookiebotOnConsentReady", function(){
+var createdUnderlay = document.getElementById("CybotCookiebotDialogBodyUnderlay");
+if (createdUnderlay){
+createdUnderlay.style.display = "none";
+}})
+</script>
+<script>
+  if(navigator.globalPrivacyControl){
+    console.log("GPC signal detected");
+  }
+</script>
+
+<script>
+function SetCookie(Name, Value, Expiration)
+{
+  // Create a date variable that contains
+  // the expiration date.
+  var ExpDate = new Date();
+  if (Expiration != null)
+   ExpDate.setDate(ExpDate.getDate() +
+           Expiration);
+  // Encode the data for storage.
+  var CookieValue = escape(Value) +
+   "; expires=" + ExpDate.toUTCString();
+  // Store the cookie.
+  document.cookie = Name + "=" + CookieValue;
+}
+</script>
+<script>
+	SetCookie('unclassifiedCookie', 'unclassifiedCookieValue', 7)
+</script>
+
+<!-- loading internally hosted script -->
+<script data-cookieconsent="marketing" type="text/javascript" src="myScript.js"></script>
+
+
+<!-- loading externally hosted script -->
+<script type="text/javascript" src="https://plain.bml.dk/cookie.js"></script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div id="jumpsection">
+  <!-- Your content goes here -->
+</div>
+
+
+</body>
+</html>
