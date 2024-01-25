@@ -14,5 +14,5 @@ function SetCookie(Name, Value, Expiration)
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-SetCookie('externalScriptCookie', 'externalScriptCookieValue', 7)
+SetCookie('scriptFileCookie', 'scriptFileCookieValue', 7)
 });
