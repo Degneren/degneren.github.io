@@ -16,22 +16,7 @@
 <body>
   <h1>For testing auto-blocked vs. manually blocked scripts</h1>
 
-<script>
-function SetCookie(Name, Value, Expiration)
-{
-  // Create a date variable that contains
-  // the expiration date.
-  var ExpDate = new Date();
-  if (Expiration != null)
-   ExpDate.setDate(ExpDate.getDate() +
-           Expiration);
-  // Encode the data for storage.
-  var CookieValue = escape(Value) +
-   "; expires=" + ExpDate.toUTCString();
-  // Store the cookie.
-  document.cookie = Name + "=" + CookieValue;
-}
-</script>
+
 
 <!-- loading auto-blocked script -->
 <script type="text/javascript" src="autoblockedscript.js"></script>
