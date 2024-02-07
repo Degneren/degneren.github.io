@@ -8,85 +8,16 @@
 ></script>
   <!-- End Cookiebot Script -->
 
-<!-- Display Bulk Consent domains on top-level banner start -->
-<script>
- window.addEventListener("CookiebotOnDialogDisplay", function () {
-var dbct = document.getElementById("CybotCookiebotDialogBodyContentText");
-var bulkdomains = document.createElement("div")
-bulkdomains.setAttribute("id", "CybotCookiebotDialogDetailBulkConsent");
-
-var addbulkdomains = dbct.appendChild(bulkdomains);
-
-})
-</script>
-<!-- Display Bulk Consent domains on top-level banner end -->
-
-
-<script>
-window.addEventListener("CookiebotOnDialogDisplay", function () {
-  const addTo = document.getElementById("CybotCookiebotDialogBodyContentText");
-    domains = [location.hostname, ...Cookiebot.bulkresetdomains],
-    p = document.createElement("p");
-    ul = document.createElement("ul");
-  p.textContent = "Your consent applies to the following domains:"
-  domains.forEach((d) => {
-    var li = document.createElement("li");
-    li.textContent = d;
-    ul.appendChild(li);
-  })
-  p.appendChild(ul);
-  addTo.parentNode.appendChild(p); 
-})
-</script>
-
-
-<!-- Remove branding from widget test start -->
-<style type="text/css">
-    .CookiebotWidget-main-logo{
-        display: none!important;
-    }
-</style>
-<!-- Remove branding from widget test end -->
-
-<script>
- window.addEventListener("CookiebotOnDialogDisplay", function () {
-console.log("CookiebotOnDialogDisplay event")
-})
-</script>
-
-
-
 </head>
 <body>
-  <h1>Test page</h1>
-  <p>
-   <a href="https://www.degn.io/cookiedeclaration">Cookie Declaration</a>
- </p>
- <br><br>
-<a href="https://www.degn.io/GTMpage">GTM page</a>
-<br><br>
-<a href="https://www.degn.io/DKPage/DKPagetest">DK page</a>
- <br><br>
-<a href="https://www.degn.io/GTMpage2">GTM page2</a>
-<br><br>
- <br><br>
-<a href="https://www.degn.io/searchpage">Search page</a>
-<br><br>
-<a href="https://www.degn.io/GoogleConsentPage">Google Consent page</a>
- <br><br><br><br><br>
+  <h1>Test page 2</h1>
+
+<br>
  <img data-src="https://www.degn.io/media/Statistics.png" data-cookieconsent="statistics" alt="Statistics">
  <img data-src="https://www.degn.io/media/Marketing.png" data-cookieconsent="marketing" alt="Marketing">
  <img data-src="https://www.degn.io/media/Preferences.png" data-cookieconsent="preferences" alt="Preferences">
-
-<br><br>
- <button onclick="Cookiebot.renew()">Edit your consent</button>
  <br><br><br>
-<button tabindex="2" onclick="SetCookie('buttonClickCookie','buttonClickCookieValue',7)">Click me for delicious cookies!</button>
-<br><br><br>
-<button onclick="Cookiebot.show()">Show banner</button>
-<br><br>
-<button onclick="Cookiebot.withdraw()">Withdraw consent</button>
-<br><br><br>
+<br>
 <h1>
   Youtube video (marked as marketing):
 </h1>
@@ -94,16 +25,6 @@ console.log("CookiebotOnDialogDisplay event")
 <img src="https://www.degn.io/media/youtubelogo.png" class="cookieconsent-optout-marketing" alt="YouTube"> 
 
 <iframe width="400" height="250" src="https://www.youtube.com/embed/28F4ogO7wN4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<!--removes Cookiebot branding -->
-<!--style type="text/css">
-    div#CybotCookiebotDialogPoweredbyCybot {
-        display: none;
-    }, 
-    a#CybotCookiebotDialog {
-        font-size: 201px;
-    }, 
-</style-->
 
 <script>
 function SetCookie(Name, Value, Expiration)
@@ -124,7 +45,5 @@ function SetCookie(Name, Value, Expiration)
 <script>
 	SetCookie('siteTestCookie', 'siteTestCookieValue', 7)
 </script>
-<div class="elementor-element elementor-element-e82d8ca elementor-aspect-ratio-169 elementor-widget elementor-widget-video" data-id="e82d8ca" data-element_type="widget" data-settings="{&quot;youtube_url&quot;:&quot;https:\/\/youtu.be\/KPzpKXp2DKI&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;loop&quot;:&quot;yes&quot;,&quot;yt_privacy&quot;:&quot;yes&quot;,&quot;lazy_load&quot;:&quot;yes&quot;,&quot;video_type&quot;:&quot;youtube&quot;,&quot;controls&quot;:&quot;yes&quot;,&quot;aspect_ratio&quot;:&quot;169&quot;}" data-widget_type="video.default">
-<div class="elementor-element elementor-element-e82d8ca elementor-aspect-ratio-169 elementor-widget elementor-widget-video" data-id="e82d8ca" data-element_type="widget" data-settings="{&quot;youtube_url&quot;:&quot;https:\/\/youtu.be\/KPzpKXp2DKI&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;loop&quot;:&quot;yes&quot;,&quot;yt_privacy&quot;:&quot;yes&quot;,&quot;lazy_load&quot;:&quot;yes&quot;,&quot;video_type&quot;:&quot;youtube&quot;,&quot;controls&quot;:&quot;yes&quot;,&quot;aspect_ratio&quot;:&quot;169&quot;}" data-widget_type="video.default">
 </body>
 </html>
