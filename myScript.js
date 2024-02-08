@@ -11,8 +11,8 @@ function SetCookie(Name, Value, Expiration)
    "; expires=" + ExpDate.toUTCString();
   // Store the cookie.
   document.cookie = Name + "=" + CookieValue;
+
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-SetCookie('scriptFileCookie', 'scriptFileCookieValue', 7)
-});
+SetCookie('necessaryCookie', 'necessaryCookieValue', 7);
+SetCookie('marketingCookie', 'marketingCookieValue', 7);
