@@ -212,7 +212,7 @@ function SetCookie(Name, Value, Expiration)
            Expiration);
   // Encode the data for storage.
   var CookieValue = escape(Value) +
-   "; expires=" + ExpDate.toUTCString();a
+   "; expires=" + ExpDate.toUTCString();
   // Store the cookie.
   document.cookie = Name + "=" + CookieValue;
 }
