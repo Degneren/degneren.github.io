@@ -11,7 +11,7 @@ scroll-behavior: smooth
 }
 
 .disabledContent,.premiumOnly {
-    background-image: url(/Images/stripetonebg-light.png)!important;
+    background-image: url(/media/stripetonebg-light.png)!important;
     opacity: .4!important;
     cursor: not-allowed!important
 }
