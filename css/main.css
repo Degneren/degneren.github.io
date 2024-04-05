@@ -10,6 +10,12 @@ scroll-behavior: smooth
   padding: 5px;
 }
 
+.disabledContent,.premiumOnly {
+    background-image: url(/Images/stripetonebg-light.png)!important;
+    opacity: .4!important;
+    cursor: not-allowed!important
+}
+
 /* Clear floats after image containers */
 .row::after {
   content: "";
