@@ -14,14 +14,13 @@
 
 <script>
   function deleteCookieAndRefresh(name) {
-    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = name + '=; Path=/; Domain=.degn.io; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     console.log(`Cookie '${name}' deleted.`);
 
     /*location.reload(); */
   }
 </script>
 
-<!-- 4. Enclose the cookie name in quotes when calling the function from onclick -->
 <button onclick="deleteCookieAndRefresh('intercom-id-lm6dce9a')">Restart Intercom conversation</button>
 <script>
   window.intercomSettings = {
