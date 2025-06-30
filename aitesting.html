@@ -28,8 +28,8 @@
   }
 </script>
 
-<button onclick="deleteCookieAndRefresh('intercom-id-lm6dce9a')">Restart Intercom conversation</button>
-<button onclick="deleteSessionTokenAndRefresh('682d9753d8c284c7f33ee9fe.sessionToken')">Restart Zendesk conversation</button>
+<button id="intercom-restart" onclick="deleteCookieAndRefresh('intercom-id-lm6dce9a')">Restart Intercom conversation</button>
+<button id="zendesk-restart" onclick="deleteSessionTokenAndRefresh('682d9753d8c284c7f33ee9fe.sessionToken')">Restart Zendesk conversation</button>
 <script>
   window.intercomSettings = {
     api_base: "https://api-iam.intercom.io",

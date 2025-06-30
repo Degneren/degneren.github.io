@@ -42,3 +42,6 @@ img {
 /*font-family:  Brush Script MT!important;*/
 }
 }
+
+.intercom-restart, .zendesk-restart {
+  align-self: center;
