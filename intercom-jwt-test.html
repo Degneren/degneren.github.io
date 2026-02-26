@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Intercom JWT Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    p.subtitle { color: #666; font-size: 0.9rem; margin-top: 0; }
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+      border-radius: 4px;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      margin-top: 16px;
+    }
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    button {
+      flex: 1;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    #btn-free { background: #e0e0e0; color: #333; }
+    #btn-pro  { background: #4f46e5; color: #fff; }
+    #btn-restart { background: #eee; color: #555; font-size: 0.85rem; padding: 8px; flex: none; width: auto; margin-top: 10px; border-radius: 6px; cursor: pointer; border: 1px solid #ccc; }
+    .jwt-output {
+      margin-top: 24px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 14px;
+      display: none;
+    }
+    .jwt-output h3 { margin: 0 0 8px; font-size: 0.9rem; color: #555; }
+    .jwt-output .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .badge.free { background: #e0e0e0; color: #555; }
+    .badge.pro  { background: #4f46e5; color: #fff; }
+    .jwt-token {
+      font-family: monospace;
+      font-size: 0.72rem;
+      word-break: break-all;
+      background: #f4f4f4;
+      padding: 8px;
+      border-radius: 4px;
+      color: #333;
+    }
+    .status {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #28a745;
+      font-weight: 600;
+    }
+    .status.error { color: #dc3545; }
+  </style>
+</head>
+<body>
+
+  <h1>Intercom JWT Test Page</h1>
+  <p class="subtitle">Test Intercom identity verification using a client-side generated JWT.</p>
+
+  <div class="warning">
+    ⚠️ <strong>Test only.</strong> The JWT secret is visible in the browser. Never expose your real secret in client-side code in production.
+  </div>
+
+  <label for="input-userid">User ID</label>
+  <input type="text" id="input-userid" placeholder="e.g. test_user_123" value="test_user_123">
+
+  <label for="input-email">Email (optional)</label>
+  <input type="email" id="input-email" placeholder="e.g. test@example.com">
+
+  <label for="input-secret">JWT Secret (Identity Verification Secret)</label>
+  <input type="text" id="input-secret" placeholder="Paste your Intercom Identity Verification secret here">
+
+  <div class="buttons">
+    <button id="btn-free" onclick="initIntercomWithPlan('free')">Free Plan</button>
+    <button id="btn-pro"  onclick="initIntercomWithPlan('pro')">Pro Plan</button>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <button id="btn-restart" onclick="restartIntercom()">Restart Intercom conversation</button>
+  </div>
+
+  <div class="jwt-output" id="jwt-output">
+    <h3>Generated JWT</h3>
+    <span class="badge" id="plan-badge"></span>
+    <div class="jwt-token" id="jwt-display"></div>
+    <div class="status" id="status-msg"></div>
+  </div>
+
+  <script>
+    // Client-side JWT generation using Web Crypto API (HS256)
+    async function generateJWT(secret, payload) {
+      function base64url(input) {
+        return btoa(input)
+          .replace(/=/g, '')
+          .replace(/\+/g, '-')
+          .replace(/\//g, '_');
+      }
+
+      const header  = base64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+      const body    = base64url(unescape(encodeURIComponent(JSON.stringify(payload))));
+      const data    = `${header}.${body}`;
+
+      const encoder  = new TextEncoder();
+      const keyData  = encoder.encode(secret);
+      const msgData  = encoder.encode(data);
+
+      const cryptoKey = await crypto.subtle.importKey(
+        'raw', keyData,
+        { name: 'HMAC', hash: 'SHA-256' },
+        false, ['sign']
+      );
+
+      const sig = await crypto.subtle.sign('HMAC', cryptoKey, msgData);
+
+      const sigB64 = btoa(String.fromCharCode(...new Uint8Array(sig)))
+        .replace(/=/g, '')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_');
+
+      return `${data}.${sigB64}`;
+    }
+
+    async function initIntercomWithPlan(plan) {
+      const userId = document.getElementById('input-userid').value.trim();
+      const email  = document.getElementById('input-email').value.trim();
+      const secret = document.getElementById('input-secret').value.trim();
+
+      if (!userId) {
+        alert('Please enter a User ID.');
+        return;
+      }
+      if (!secret) {
+        alert('Please enter your JWT Secret.');
+        return;
+      }
+
+      const payload = {
+        sub: userId,
+        iat: Math.floor(Date.now() / 1000),
+        plan: plan
+      };
+      if (email) payload.email = email;
+
+      let token;
+      try {
+        token = await generateJWT(secret, payload);
+      } catch (e) {
+        showOutput(plan, null, 'Error generating JWT: ' + e.message);
+        return;
+      }
+
+      // Shut down existing Intercom instance before re-initialising
+      if (window.Intercom) {
+        window.Intercom('shutdown');
+      }
+
+      window.intercomSettings = {
+        api_base: "https://api-iam.eu.intercom.io",
+        app_id: "j3ouceg3",
+        user_id: userId,
+        user_hash: token,
+        plan: plan
+      };
+
+      if (email) window.intercomSettings.email = email;
+
+      window.Intercom('boot', window.intercomSettings);
+
+      showOutput(plan, token, 'Intercom re-initialised with ' + plan.toUpperCase() + ' plan.');
+    }
+
+    function showOutput(plan, token, statusMsg) {
+      const output = document.getElementById('jwt-output');
+      const badge  = document.getElementById('plan-badge');
+      const display = document.getElementById('jwt-display');
+      const status  = document.getElementById('status-msg');
+
+      output.style.display = 'block';
+      badge.textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+      badge.className = 'badge ' + plan;
+      display.textContent = token || '—';
+      status.textContent = statusMsg;
+      status.className = token ? 'status' : 'status error';
+    }
+
+    function restartIntercom() {
+      document.cookie = 'intercom-id-j3ouceg3=; Path=/; Domain=.degn.io; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      location.reload();
+    }
+  </script>
+
+  <!-- Intercom widget (same as cb4shopify.html) -->
+  <script>
+    window.intercomSettings = {
+      api_base: "https://api-iam.eu.intercom.io",
+      app_id: "j3ouceg3",
+    };
+  </script>
+
+  <script>
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/j3ouceg3';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+  </script>
+
+</body>
+</html>
