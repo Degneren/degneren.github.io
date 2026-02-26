@@ -121,14 +121,28 @@
   </div>
 
   <div class="jwt-output" id="jwt-output">
-    <h3>Generated JWT</h3>
     <span class="badge" id="plan-badge"></span>
+    <h3 style="margin-top:10px;">JWT (full token — for inspection)</h3>
     <div class="jwt-token" id="jwt-display"></div>
+    <h3 style="margin-top:12px;">user_hash (HMAC-SHA256 hex — sent to Intercom)</h3>
+    <div class="jwt-token" id="hash-display"></div>
     <div class="status" id="status-msg"></div>
   </div>
 
   <script>
-    // Client-side JWT generation using Web Crypto API (HS256)
+    // Clear any stale Intercom session data from previous pages to prevent 404s on conversation load
+    (function () {
+      document.cookie = 'intercom-id-j3ouceg3=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      for (var key in localStorage) {
+        if (key.toLowerCase().indexOf('intercom') !== -1) {
+          localStorage.removeItem(key);
+        }
+      }
+    })();
+  </script>
+
+  <script>
+    // Generate a full HS256 JWT (for display/inspection)
     async function generateJWT(secret, payload) {
       function base64url(input) {
         return btoa(input)
@@ -136,29 +150,31 @@
           .replace(/\+/g, '-')
           .replace(/\//g, '_');
       }
-
-      const header  = base64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
-      const body    = base64url(unescape(encodeURIComponent(JSON.stringify(payload))));
-      const data    = `${header}.${body}`;
-
-      const encoder  = new TextEncoder();
-      const keyData  = encoder.encode(secret);
-      const msgData  = encoder.encode(data);
-
-      const cryptoKey = await crypto.subtle.importKey(
-        'raw', keyData,
-        { name: 'HMAC', hash: 'SHA-256' },
-        false, ['sign']
+      const header = base64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+      const body   = base64url(unescape(encodeURIComponent(JSON.stringify(payload))));
+      const data   = `${header}.${body}`;
+      const encoder = new TextEncoder();
+      const key = await crypto.subtle.importKey(
+        'raw', encoder.encode(secret),
+        { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
       );
-
-      const sig = await crypto.subtle.sign('HMAC', cryptoKey, msgData);
-
+      const sig = await crypto.subtle.sign('HMAC', key, encoder.encode(data));
       const sigB64 = btoa(String.fromCharCode(...new Uint8Array(sig)))
-        .replace(/=/g, '')
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_');
-
+        .replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
       return `${data}.${sigB64}`;
+    }
+
+    // Generate the HMAC-SHA256 hex hash Intercom expects as user_hash
+    async function generateUserHash(secret, userId) {
+      const encoder = new TextEncoder();
+      const key = await crypto.subtle.importKey(
+        'raw', encoder.encode(secret),
+        { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+      );
+      const sig = await crypto.subtle.sign('HMAC', key, encoder.encode(userId));
+      return Array.from(new Uint8Array(sig))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
     }
 
     async function initIntercomWithPlan(plan) {
@@ -166,71 +182,65 @@
       const email  = document.getElementById('input-email').value.trim();
       const secret = document.getElementById('input-secret').value.trim();
 
-      if (!userId) {
-        alert('Please enter a User ID.');
-        return;
-      }
-      if (!secret) {
-        alert('Please enter your JWT Secret.');
-        return;
-      }
+      if (!userId) { alert('Please enter a User ID.'); return; }
+      if (!secret) { alert('Please enter your JWT Secret.'); return; }
 
-      const payload = {
+      const jwtPayload = {
         sub: userId,
         iat: Math.floor(Date.now() / 1000),
         plan: plan
       };
-      if (email) payload.email = email;
+      if (email) jwtPayload.email = email;
 
-      let token;
+      let jwt, userHash;
       try {
-        token = await generateJWT(secret, payload);
+        [jwt, userHash] = await Promise.all([
+          generateJWT(secret, jwtPayload),
+          generateUserHash(secret, userId)
+        ]);
       } catch (e) {
-        showOutput(plan, null, 'Error generating JWT: ' + e.message);
+        showOutput(plan, null, null, 'Error: ' + e.message);
         return;
       }
 
-      // Shut down existing Intercom instance before re-initialising
-      if (window.Intercom) {
-        window.Intercom('shutdown');
-      }
+      window.Intercom('shutdown');
 
       window.intercomSettings = {
         api_base: "https://api-iam.eu.intercom.io",
         app_id: "j3ouceg3",
         user_id: userId,
-        user_hash: token,
+        user_hash: userHash,
         plan: plan
       };
-
       if (email) window.intercomSettings.email = email;
 
       window.Intercom('boot', window.intercomSettings);
 
-      showOutput(plan, token, 'Intercom re-initialised with ' + plan.toUpperCase() + ' plan.');
+      showOutput(plan, jwt, userHash, 'Intercom re-initialised with ' + plan.toUpperCase() + ' plan.');
     }
 
-    function showOutput(plan, token, statusMsg) {
-      const output = document.getElementById('jwt-output');
-      const badge  = document.getElementById('plan-badge');
-      const display = document.getElementById('jwt-display');
-      const status  = document.getElementById('status-msg');
-
-      output.style.display = 'block';
+    function showOutput(plan, jwt, userHash, statusMsg) {
+      document.getElementById('jwt-output').style.display = 'block';
+      const badge = document.getElementById('plan-badge');
       badge.textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
       badge.className = 'badge ' + plan;
-      display.textContent = token || '—';
+      document.getElementById('jwt-display').textContent = jwt || '—';
+      document.getElementById('hash-display').textContent = userHash || '—';
+      const status = document.getElementById('status-msg');
       status.textContent = statusMsg;
-      status.className = token ? 'status' : 'status error';
+      status.className = jwt ? 'status' : 'status error';
     }
 
     function restartIntercom() {
-      document.cookie = 'intercom-id-j3ouceg3=; Path=/; Domain=.degn.io; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie = 'intercom-id-j3ouceg3=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      for (var key in localStorage) {
+        if (key.toLowerCase().indexOf('intercom') !== -1) localStorage.removeItem(key);
+      }
       location.reload();
     }
   </script>
 
-  <!-- Intercom widget (same as cb4shopify.html) -->
+  <!-- Intercom widget: boot fresh (no reattach_activator) to avoid picking up stale sessions -->
   <script>
     window.intercomSettings = {
       api_base: "https://api-iam.eu.intercom.io",
@@ -239,7 +249,7 @@
   </script>
 
   <script>
-    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/j3ouceg3';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('shutdown');ic('boot',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/j3ouceg3';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
   </script>
 
 </body>
