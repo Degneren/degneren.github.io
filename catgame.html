@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cat & Mouse - degn.io</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #16213e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: system-ui, sans-serif;
+            color: #eee;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+
+        #hud {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        #canvas {
+            border-radius: 12px;
+            border: 2px solid #2a2a5a;
+            cursor: none;
+            display: block;
+        }
+
+        #back {
+            color: #666;
+            text-decoration: none;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+
+        #back:hover {
+            color: #eee;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(10, 10, 30, 0.92);
+            border: 1px solid #2a2a5a;
+            border-radius: 16px;
+            padding: 40px 60px;
+            text-align: center;
+            backdrop-filter: blur(6px);
+            z-index: 10;
+        }
+
+        #overlay h2 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        #overlay p {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        #overlay button {
+            margin-top: 20px;
+            padding: 12px 36px;
+            font-size: 1rem;
+            background: #e94560;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #overlay button:hover {
+            background: #c7304e;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🐱 Cat &amp; Mouse</h1>
+    <div id="hud">
+        <span>Score: <strong id="score">0</strong></span>
+        <span>Time: <strong id="timer">60</strong>s</span>
+    </div>
+    <canvas id="canvas"></canvas>
+    <a id="back" href="https://www.degn.io">← Back to degn.io</a>
+
+    <div id="overlay">
+        <h2>🐱 Cat &amp; Mouse</h2>
+        <p>Move your mouse to control the cat.<br>Catch as many mice as you can in 60 seconds!<br><br>🐭 <em>Mice will run away when you get close!</em></p>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const overlay = document.getElementById('overlay');
+        const scoreEl = document.getElementById('score');
+        const timerEl = document.getElementById('timer');
+
+        const W = Math.min(820, window.innerWidth - 20);
+        const H = Math.min(520, window.innerHeight - 160);
+        canvas.width = W;
+        canvas.height = H;
+
+        let score = 0;
+        let timeLeft = 60;
+        let gameRunning = false;
+        let animId = null;
+        let timerInterval = null;
+        let particles = [];
+        let mice = [];
+        let mouseX = W / 2;
+        let mouseY = H / 2;
+
+        const cat = { x: W / 2, y: H / 2, size: 40 };
+
+        canvas.addEventListener('mousemove', e => {
+            const r = canvas.getBoundingClientRect();
+            mouseX = e.clientX - r.left;
+            mouseY = e.clientY - r.top;
+        });
+
+        // Touch support
+        canvas.addEventListener('touchmove', e => {
+            e.preventDefault();
+            const r = canvas.getBoundingClientRect();
+            mouseX = e.touches[0].clientX - r.left;
+            mouseY = e.touches[0].clientY - r.top;
+        }, { passive: false });
+
+        class Mouse {
+            constructor() {
+                this.x = 60 + Math.random() * (W - 120);
+                this.y = 60 + Math.random() * (H - 120);
+                this.size = 30;
+                this.speed = 1.2 + Math.random() * 1.4;
+                const a = Math.random() * Math.PI * 2;
+                this.vx = Math.cos(a) * this.speed;
+                this.vy = Math.sin(a) * this.speed;
+                this.dirTimer = 80 + Math.floor(Math.random() * 100);
+                this.scared = false;
+                this.scaredTimer = 0;
+                this.caught = false;
+            }
+
+            update() {
+                if (this.caught) return;
+
+                const dx = this.x - cat.x;
+                const dy = this.y - cat.y;
+                const dist = Math.hypot(dx, dy);
+
+                if (dist < 130) {
+                    this.scared = true;
+                    this.scaredTimer = 40;
+                    if (dist > 0) {
+                        this.vx = (dx / dist) * this.speed * 2.2;
+                        this.vy = (dy / dist) * this.speed * 2.2;
+                    }
+                } else {
+                    if (this.scaredTimer > 0) this.scaredTimer--;
+                    else this.scared = false;
+                }
+
+                this.dirTimer--;
+                if (this.dirTimer <= 0 && !this.scared) {
+                    const a = Math.random() * Math.PI * 2;
+                    this.vx = Math.cos(a) * this.speed;
+                    this.vy = Math.sin(a) * this.speed;
+                    this.dirTimer = 80 + Math.floor(Math.random() * 100);
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < this.size) { this.x = this.size; this.vx = Math.abs(this.vx); }
+                if (this.x > W - this.size) { this.x = W - this.size; this.vx = -Math.abs(this.vx); }
+                if (this.y < this.size) { this.y = this.size; this.vy = Math.abs(this.vy); }
+                if (this.y > H - this.size) { this.y = H - this.size; this.vy = -Math.abs(this.vy); }
+            }
+        }
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                const a = Math.random() * Math.PI * 2;
+                const s = 2 + Math.random() * 4;
+                this.vx = Math.cos(a) * s;
+                this.vy = Math.sin(a) * s;
+                this.life = 1.0;
+                this.decay = 0.035 + Math.random() * 0.025;
+                this.size = 14 + Math.random() * 8;
+                this.emoji = ['✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 4)];
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.12;
+                this.life -= this.decay;
+            }
+        }
+
+        function spawnMice(n) {
+            for (let i = 0; i < n; i++) mice.push(new Mouse());
+        }
+
+        function startGame() {
+            score = 0;
+            timeLeft = 60;
+            mice = [];
+            particles = [];
+            cat.x = W / 2;
+            cat.y = H / 2;
+            gameRunning = true;
+            scoreEl.textContent = '0';
+            timerEl.textContent = '60';
+            overlay.style.display = 'none';
+
+            spawnMice(6);
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (!gameRunning) return;
+                timeLeft--;
+                timerEl.textContent = timeLeft;
+                if (timeLeft === 40) spawnMice(2);
+                if (timeLeft === 20) spawnMice(3);
+                if (timeLeft <= 0) endGame();
+            }, 1000);
+
+            if (animId) cancelAnimationFrame(animId);
+            loop();
+        }
+
+        function endGame() {
+            gameRunning = false;
+            clearInterval(timerInterval);
+            cancelAnimationFrame(animId);
+            overlay.innerHTML = `
+                <h2>Time's up! 🎉</h2>
+                <p>You caught <strong style="color:#e94560;font-size:1.6rem">${score}</strong> mice!</p>
+                <p>${getRating(score)}</p>
+                <button onclick="startGame()">Play Again</button>
+            `;
+            overlay.style.display = 'block';
+        }
+
+        function getRating(s) {
+            if (s >= 28) return '🏆 Legendary mouser! You are the cat.';
+            if (s >= 20) return '🥇 Master hunter! Tom would bow down.';
+            if (s >= 13) return '🥈 Great job! The mice tremble at your name.';
+            if (s >= 6)  return '🥉 Not bad! Keep those paws sharp.';
+            return '😅 The mice are laughing… try again!';
+        }
+
+        function drawEmoji(emoji, x, y, size) {
+            ctx.font = `${size}px serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(emoji, x, y);
+        }
+
+        function checkCatches() {
+            mice.forEach(m => {
+                if (m.caught) return;
+                const dist = Math.hypot(m.x - cat.x, m.y - cat.y);
+                if (dist < cat.size * 0.6 + m.size * 0.5) {
+                    m.caught = true;
+                    score++;
+                    scoreEl.textContent = score;
+                    for (let i = 0; i < 8; i++) particles.push(new Particle(m.x, m.y));
+                    setTimeout(() => { if (gameRunning) mice.push(new Mouse()); }, 1800);
+                }
+            });
+            mice = mice.filter(m => !m.caught);
+        }
+
+        function loop() {
+            // Background
+            ctx.fillStyle = '#16213e';
+            ctx.fillRect(0, 0, W, H);
+
+            // Subtle grid
+            ctx.strokeStyle = 'rgba(255,255,255,0.025)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < W; x += 40) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+            }
+            for (let y = 0; y < H; y += 40) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+            }
+
+            // Mice
+            mice.forEach(m => {
+                m.update();
+
+                // Shadow
+                ctx.save();
+                ctx.globalAlpha = 0.25;
+                ctx.filter = 'blur(5px)';
+                drawEmoji('🐭', m.x + 3, m.y + 7, m.size);
+                ctx.restore();
+
+                // Scared indicator
+                if (m.scared) {
+                    ctx.save();
+                    ctx.globalAlpha = 0.75;
+                    drawEmoji('😱', m.x, m.y - m.size, 14);
+                    ctx.restore();
+                }
+
+                drawEmoji('🐭', m.x, m.y, m.size);
+            });
+
+            // Smooth cat movement
+            cat.x += (mouseX - cat.x) * 0.2;
+            cat.y += (mouseY - cat.y) * 0.2;
+
+            // Cat shadow
+            ctx.save();
+            ctx.globalAlpha = 0.25;
+            ctx.filter = 'blur(6px)';
+            drawEmoji('🐱', cat.x + 4, cat.y + 8, cat.size);
+            ctx.restore();
+
+            // Catch radius glow
+            ctx.save();
+            ctx.strokeStyle = 'rgba(255,200,60,0.12)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(cat.x, cat.y, cat.size * 0.6, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.restore();
+
+            // Cat
+            drawEmoji('🐱', cat.x, cat.y, cat.size);
+
+            // Particles
+            particles = particles.filter(p => p.life > 0);
+            particles.forEach(p => {
+                p.update();
+                ctx.save();
+                ctx.globalAlpha = p.life;
+                drawEmoji(p.emoji, p.x, p.y, p.size);
+                ctx.restore();
+            });
+
+            checkCatches();
+            animId = requestAnimationFrame(loop);
+        }
+    </script>
+</body>
+
+</html>
