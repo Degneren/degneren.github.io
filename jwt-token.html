@@ -70,13 +70,13 @@
     function launchIntercom() {
       var name  = document.getElementById('input-name').value.trim();
       var email = document.getElementById('input-email').value.trim();
-      var plan_type_test = document.getElementById('input-plan-type').value.trim();
+      var plan_type_test_new = document.getElementById('input-plan-type').value.trim();
 
       window.intercomSettings = {
         app_id: "lm6dce9a",
         name:  name  || undefined,
         email: email || undefined,
-        plan_type_test: plan_type_test || undefined
+        plan_type_test_new: plan_type_test_new || undefined
       };
 
       window.Intercom('shutdown');
