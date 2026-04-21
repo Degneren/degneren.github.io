@@ -132,7 +132,7 @@
   <script>
     // Clear any stale Intercom session data from previous pages to prevent 404s on conversation load
     (function () {
-      document.cookie = 'intercom-id-j3ouceg3=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie = 'intercom-id-j3ouceg3=; Path=/; Domain=.degn.io; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       for (var key in localStorage) {
         if (key.toLowerCase().indexOf('intercom') !== -1) {
           localStorage.removeItem(key);
@@ -232,7 +232,7 @@
     }
 
     function restartIntercom() {
-      document.cookie = 'intercom-id-j3ouceg3=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      document.cookie = 'intercom-id-j3ouceg3=; Path=/; Domain=.degn.io; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       for (var key in localStorage) {
         if (key.toLowerCase().indexOf('intercom') !== -1) localStorage.removeItem(key);
       }

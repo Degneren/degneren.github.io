@@ -14,6 +14,7 @@
     }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
     p.subtitle { color: #666; font-size: 0.9rem; margin-top: 0; }
+<<<<<<< HEAD
     label {
       display: block;
       font-size: 0.85rem;
@@ -43,11 +44,32 @@
       transition: opacity 0.2s;
     }
     button:hover { opacity: 0.85; }
+=======
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #eee;
+    }
+    th { background: #f0f0f0; font-weight: 600; width: 40%; }
+    td { font-family: monospace; }
+    tr:last-child th, tr:last-child td { border-bottom: none; }
+>>>>>>> 3c8958ea46e981152fe3d7a6e63c7a8076d293a8
   </style>
 </head>
 <body>
 
   <h1>Intercom Test — lm6dce9a</h1>
+<<<<<<< HEAD
   <p class="subtitle">Fill in your details and click the button to launch the Intercom Messenger.</p>
 
   <label for="input-name">Name</label>
@@ -75,6 +97,26 @@
       window.Intercom('boot', window.intercomSettings);
       window.Intercom('show');
     }
+=======
+  <p class="subtitle">Boots Intercom with a fixed identity on page load.</p>
+
+  <table>
+    <tr><th>Workspace ID</th><td>lm6dce9a</td></tr>
+    <tr><th>Name</th><td>Degn</td></tr>
+    <tr><th>Email</th><td>christian@degn.io</td></tr>
+  </table>
+
+  <script>
+    window.intercomSettings = {
+      app_id: "lm6dce9a",
+      name: "Degn",
+      email: "christian@degn.io"
+    };
+  </script>
+
+  <script>
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/lm6dce9a';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+>>>>>>> 3c8958ea46e981152fe3d7a6e63c7a8076d293a8
   </script>
 
 </body>
