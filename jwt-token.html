@@ -21,7 +21,7 @@
       margin-bottom: 4px;
       margin-top: 16px;
     }
-    input[type="text"], input[type="email"] {
+    input[type="text"], input[type="email"], select {
       width: 100%;
       padding: 8px 10px;
       border: 1px solid #ccc;
@@ -56,6 +56,12 @@
   <label for="input-email">Email</label>
   <input type="email" id="input-email" placeholder="e.g. christian@degn.io" value="christian@degn.io">
 
+  <label for="input-plan-type">Plan Type</label>
+  <select id="input-plan-type">
+    <option value="Free">Free</option>
+    <option value="Pro" selected>Pro</option>
+  </select>
+
   <button onclick="launchIntercom()">Launch Intercom Messenger</button>
 
   <script>
@@ -64,11 +70,13 @@
     function launchIntercom() {
       var name  = document.getElementById('input-name').value.trim();
       var email = document.getElementById('input-email').value.trim();
+      var plan_type_test = document.getElementById('input-plan-type').value.trim();
 
       window.intercomSettings = {
         app_id: "lm6dce9a",
         name:  name  || undefined,
-        email: email || undefined
+        email: email || undefined,
+        plan_type_test: plan_type_test || undefined
       };
 
       window.Intercom('shutdown');
