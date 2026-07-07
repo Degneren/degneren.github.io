@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Intercom Chat Reset Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    p.subtitle { color: #666; font-size: 0.9rem; margin-top: 0; margin-bottom: 32px; }
+    button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.85; }
+    #btn-reset { background: #dc3545; color: #fff; }
+    .status {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #28a745;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Intercom Chat Reset Test</h1>
+  <p class="subtitle">The Intercom chatbot is loaded below. Use the button to fully reset the chat session.</p>
+
+  <button id="btn-reset" onclick="resetIntercom()">Reset Chat</button>
+  <div class="status" id="status-msg"></div>
+
+  <script>
+    function resetIntercom() {
+      // Shut down the running Intercom instance
+      if (window.Intercom) {
+        window.Intercom('shutdown');
+      }
+
+      // Delete Intercom cookies for this app on .degn.io
+      var cookieNames = ['intercom-id-j3ouceg3', 'intercom-session-j3ouceg3'];
+      var domains = ['.degn.io', 'www.degn.io', ''];
+      cookieNames.forEach(function(name) {
+        domains.forEach(function(domain) {
+          var domainStr = domain ? '; Domain=' + domain : '';
+          document.cookie = name + '=; Path=/' + domainStr + '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        });
+      });
+
+      // Clear all Intercom entries from localStorage
+      Object.keys(localStorage).forEach(function(key) {
+        if (key.toLowerCase().indexOf('intercom') !== -1) {
+          localStorage.removeItem(key);
+        }
+      });
+
+      document.getElementById('status-msg').textContent = 'Chat reset — reloading…';
+      setTimeout(function() { location.reload(); }, 600);
+    }
+  </script>
+
+  <script>
+    window.intercomSettings = {
+      api_base: "https://api-iam.eu.intercom.io",
+      app_id: "j3ouceg3",
+    };
+  </script>
+
+  <script>
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('shutdown');ic('boot',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/j3ouceg3';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+  </script>
+
+</body>
+</html>
