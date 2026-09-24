@@ -71,28 +71,21 @@
     };
   </script>
 
-  <script>
-    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('shutdown');ic('boot',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/j3ouceg3';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-
-    function launchIntercom() {
-      var name  = document.getElementById('input-name').value.trim();
-      var email = document.getElementById('input-email').value.trim();
-      var plan_type_test_new = document.getElementById('input-plan-type').value.trim();
-
-      window.intercomSettings = {
-        api_base: "https://api-iam.eu.intercom.io",
-        app_id: "j3ouceg3",
-        name:  name  || undefined,
-        email: email || undefined,
-        plan_type_test_new: plan_type_test_new || undefined, 
-        source: jwt-token-page
-      };
-
-      window.Intercom('shutdown');
-      window.Intercom('boot', window.intercomSettings);
-      window.Intercom('show');
-    }
-  </script>
+<script>
+  window.Intercom("boot", {
+    api_base: "https://api-iam.eu.intercom.io",
+    app_id: "j3ouceg3",
+    intercom_user_jwt: "<TOKEN>",               // Required - JWT token generated on your server
+    non_sensitive_attribute1: "non-sensitive",  // Optional
+    non_sensitive_attribute2: "non-sensitive",  // Optional
+    non_sensitive_attribute3: "non-sensitive",  // Optional
+    session_duration: 86400000                  // 1 day (Optional)
+  });
+</script>
+<script>
+  // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/j3ouceg3'
+  (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/j3ouceg3';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+</script>
 
 </body>
 </html>
