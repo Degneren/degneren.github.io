@@ -3,73 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Intercom – j3ouceg3</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 0 20px;
-      background: #f9f9f9;
-      color: #333;
-    }
-    h1 { font-size: 1.4rem; margin-bottom: 4px; }
-    p.subtitle { color: #666; font-size: 0.9rem; margin-top: 0; }
-    label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-      margin-top: 16px;
-    }
-    input[type="text"], input[type="email"], select {
-      width: 100%;
-      padding: 8px 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      box-sizing: border-box;
-    }
-    button {
-      margin-top: 24px;
-      width: 100%;
-      padding: 12px;
-      font-size: 1rem;
-      font-weight: 600;
-      background: #4f46e5;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    button:hover { opacity: 0.85; }
-  </style>
 </head>
 <body>
-
-  <h1>Intercom Test — j3ouceg3</h1>
-  <p class="subtitle">Fill in your details and click the button to launch the Intercom Messenger.</p>
-
-  <label for="input-name">Name</label>
-  <input type="text" id="input-name" placeholder="e.g. Degn" value="Degn">
-
-  <label for="input-email">Email</label>
-  <input type="email" id="input-email" placeholder="e.g. christian@degn.io" value="christian@degn.io">
-
-  <label for="input-plan-type">Plan Type</label>
-  <select id="input-plan-type">
-    <option value="Free">Free</option>
-    <option value="Pro" selected>Pro</option>
-  </select>
-
   <button onclick="Intercom('show')">Launch Intercom Messenger</button>
 
-  <script>
-    window.intercomSettings = {
-      api_base: "https://api-iam.eu.intercom.io",
-      app_id: "j3ouceg3",
-    };
-  </script>
+<script>
+  window.intercomSettings = {
+    api_base: "https://api-iam.eu.intercom.io",
+    app_id: "j3ouceg3",
+    messenger_environment: "wiupfacq4s",
+    user_id: user.id, // IMPORTANT: 
+    // In Zendesk, ensure that each user has a unique external_id, typically their user_id or email.
+    // In Intercom, when installing Messenger, pass a user_id that matches the external_id used for that user in Zendesk.
+    // If no user_id exists, the user's email is used instead to match the external_id in Zendesk.
+    name: user.name, // IMPORTANT: Replace "user.name" with the variable you use to capture the user's name
+    email: user.email, // IMPORTANT: Replace "user.email" with the variable you use to capture the user's email address
+    created_at: user.createdAt, // IMPORTANT: Replace "user.createdAt" with the variable you use to capture the user's sign-up date
+  };
+</script>
+
+
+<script>
+  // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/j3ouceg3'
+  (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/j3ouceg3';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+</script>
 
 <script>
   window.Intercom("boot", {
