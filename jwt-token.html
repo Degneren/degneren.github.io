@@ -5,17 +5,28 @@
   <title>Intercom – j3ouceg3</title>
 </head>
 <body>
-  <button onclick="Intercom('show')">Launch Intercom Messenger</button>
+  <button onclick="deleteIntercomIdCookie(); Intercom('show')">Launch Intercom Messenger</button>
+
+<script>
+  function deleteIntercomIdCookie() {
+    var name = "intercom-id-j3ouceg3";
+    var expired = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+    var host = location.hostname;
+    var parts = host.split(".");
+    // Delete host-only cookie plus the host and parent-domain variants
+    document.cookie = expired;
+    document.cookie = expired + "; domain=" + host;
+    if (parts.length > 2) {
+      document.cookie = expired + "; domain=." + parts.slice(-2).join(".");
+    }
+  }
+</script>
 
 <script>
   window.intercomSettings = {
     api_base: "https://api-iam.eu.intercom.io",
-    app_id: "j3ouceg3",
-    // In Zendesk, ensure that each user has a unique external_id, typically their user_id or email.
-    // In Intercom, when installing Messenger, pass a user_id that matches the external_id used for that user in Zendesk.
-    // If no user_id exists, the user's email is used instead to match the external_id in Zendesk.
-    name: "test name" // IMPORTANT: Replace "user.name" with the variable you use to capture the user's name
-  };
+    app_id: "j3ouceg3"
+      };
 </script>
 
 
@@ -28,7 +39,8 @@
   window.Intercom("boot", {
     api_base: "https://api-iam.eu.intercom.io",
     app_id: "j3ouceg3",
-    active_workflow: "test_workflow_value"
+    active_workflow: "test_workflow_value",
+    name: "test name"
   });
 </script>
 </body>
